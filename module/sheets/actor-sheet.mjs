@@ -17,7 +17,7 @@ export class NoirActorSheet extends ActorSheet {
   /** @override */
   getData() {
     const context = super.getData();
-    // Использование this.actor.system наиболее надежно в v13
+    // На v13 Foundry system data получаем через this.actor.system
     context.system = this.actor.system; 
     return context;
   }
@@ -32,12 +32,11 @@ export class NoirActorSheet extends ActorSheet {
     // 2. Интерактивные Маркеры (Пули HP, Круги Стресса, Капсулы Препаратов)
     html.find('.pills .pill').click(this._onPillClick.bind(this));
 
-    // 3. Смена Ментального Состояния (Слайдер) - для визуального эффекта
+    // 3. Смена Ментального Состояния (Слайдер) - вызов единого метода актера
     html.find('.mind-slider').change(event => this._onMindStateChange(event, html));
     
-    // Применим фильтр экрана с защитой от undefined
-    const mindValue = this.actor.system?.mindState?.value ?? 0;
-    this._applyVisualFilter(mindValue, html);
+    // Применим фильтр экрана прямо через метод актера при открытии листа
+    this.actor.applyScreenFilter();
   }
 
   // --- ОБРАБОТЧИКИ СОБЫТИЙ ---
@@ -49,7 +48,7 @@ export class NoirActorSheet extends ActorSheet {
     event.preventDefault();
     const element = event.currentTarget;
     const statKey = element.dataset.stat;
-    const stat = this.actor.system.stats[statKey];
+    const stat = this.actor.system.stats?.[statKey];
 
     if (!stat) return;
 
@@ -57,7 +56,7 @@ export class NoirActorSheet extends ActorSheet {
     const formula = `1d12 + ${stat.value}`;
     const roll = await new Roll(formula).evaluate();
 
-    // Отправляем красивый бросок в чат
+    // Отправляем бросок в чат
     await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: `Бросок характеристики: <b>${stat.label}</b>`
@@ -88,28 +87,11 @@ export class NoirActorSheet extends ActorSheet {
    * Обработчик изменения слайдера Ментального состояния
    */
   _onMindStateChange(event, html) {
-    const value = parseInt(event.target.value);
-    this._applyVisualFilter(value, html);
+    // Вся логика переключения лежит централизованно в NoirActor
+    this.actor.applyScreenFilter();
   }
 
   // --- ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ---
-
-  /**
-   * Применяет CSS фильтры к экрану Foundry в зависимости от Цинизма/Куража
-   */
-  _applyVisualFilter(value, html) {
-    const body = document.body;
-    
-    body.classList.remove('noir-filter-cynicism', 'noir-filter-courage', 'noir-filter-neutral');
-
-    if (value <= -3) {
-      body.classList.add('noir-filter-cynicism');
-    } else if (value >= 3) {
-      body.classList.add('noir-filter-courage');
-    } else {
-      body.classList.add('noir-filter-neutral');
-    }
-  }
 
   /**
    * Определяет путь к данным системных ресурсов по классу элемента
