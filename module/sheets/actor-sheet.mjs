@@ -10,15 +10,15 @@ export class NoirActorSheet extends ActorSheet {
       template: "systems/noir-core/templates/actor/character-sheet.hbs",
       width: 720,
       height: 750,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "primary" }]
     });
   }
 
   /** @override */
   getData() {
     const context = super.getData();
-    // На v13 Foundry system data лежит в context.data.system
-    context.system = context.data.system; 
+    // Использование this.actor.system наиболее надежно в v13
+    context.system = this.actor.system; 
     return context;
   }
 
@@ -35,8 +35,9 @@ export class NoirActorSheet extends ActorSheet {
     // 3. Смена Ментального Состояния (Слайдер) - для визуального эффекта
     html.find('.mind-slider').change(event => this._onMindStateChange(event, html));
     
-    // Применим фильтр экрана сразу при открытии листа
-    this._applyVisualFilter(this.actor.system.mindState.value, html);
+    // Применим фильтр экрана с защитой от undefined
+    const mindValue = this.actor.system?.mindState?.value ?? 0;
+    this._applyVisualFilter(mindValue, html);
   }
 
   // --- ОБРАБОТЧИКИ СОБЫТИЙ ---
@@ -49,6 +50,8 @@ export class NoirActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const statKey = element.dataset.stat;
     const stat = this.actor.system.stats[statKey];
+
+    if (!stat) return;
 
     // Формула броска Noir: 1d12 + значение
     const formula = `1d12 + ${stat.value}`;
@@ -67,22 +70,17 @@ export class NoirActorSheet extends ActorSheet {
   async _onPillClick(event) {
     event.preventDefault();
     const pill = event.currentTarget;
-    const index = parseInt(pill.dataset.index); // Индекс кликнутой пули
+    const index = parseInt(pill.dataset.index);
     
-    // Пытаемся понять, в каком мы блоке (health, stress, exhaustion)
     const pillsContainer = pill.closest('.pills');
     const systemPath = this._getSystemPathFromPills(pillsContainer);
     
     if (!systemPath) return;
 
-    // Новое значение равно индексу + 1 (так как индексы с 0)
     const newValue = index + 1;
-    
-    // Если кликнули по последней заполненной, сбрасываем значение на index (т.е. на 1 меньше)
     const currentValue = foundry.utils.getProperty(this.actor, `${systemPath}.value`);
     const finalValue = (currentValue === newValue) ? index : newValue;
 
-    // Обновляем данные актера
     await this.actor.update({ [`${systemPath}.value`]: finalValue });
   }
 
@@ -91,8 +89,6 @@ export class NoirActorSheet extends ActorSheet {
    */
   _onMindStateChange(event, html) {
     const value = parseInt(event.target.value);
-    // Foundry автоматически обновит данные (по имени input range), 
-    // нам нужно только применить визуальный фильтр экрана.
     this._applyVisualFilter(value, html);
   }
 
@@ -102,23 +98,19 @@ export class NoirActorSheet extends ActorSheet {
    * Применяет CSS фильтры к экрану Foundry в зависимости от Цинизма/Куража
    */
   _applyVisualFilter(value, html) {
-    // В v13 мы можем вешать классы на document.body, чтобы менять весь Foundry.
     const body = document.body;
     
-    // Сбрасываем старые Noir-фильтры
     body.classList.remove('noir-filter-cynicism', 'noir-filter-courage', 'noir-filter-neutral');
 
     if (value <= -3) {
-      // КРАЙНИЙ ЦИНИЗМ: Черно-белый, контрастный, "тяжелый"
       body.classList.add('noir-filter-cynicism');
     } else if (value >= 3) {
-      // КРАЙНИЙ КУРАЖ: Яркие, сочные, перенасыщенные цвета
       body.classList.add('noir-filter-courage');
     } else {
-      // НЕЙТРАЛ (стандарт Foundry)
       body.classList.add('noir-filter-neutral');
     }
   }
+
   /**
    * Определяет путь к данным системных ресурсов по классу элемента
    */
@@ -129,4 +121,4 @@ export class NoirActorSheet extends ActorSheet {
     if (pillsContainer.classList.contains('exhaustion-pills')) return 'system.exhaustion';
     return null;
   }
-  }
+}
