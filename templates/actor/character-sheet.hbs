@@ -1,0 +1,181 @@
+<form class="{{cssClass}} noir-actor-sheet" autocomplete="off">
+  
+  {{!-- ШАПКА ЛИСТА: Имя и Слайдер Ментальности --}}
+  <header class="sheet-header noir-header">
+    <div class="header-details">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="Имя Персонажа"/>
+      </h1>
+      <div class="system-meta">
+        <span class="system-title">NOIR SYSTEM CORE</span>
+        <span class="version">v0.0.1</span>
+      </div>
+    </div>
+
+    {{!-- Слайдер Ментальности (Цинизм <-> Кураж) --}}
+    <div class="mind-state-block">
+      <div class="mind-state-label">
+        {{#if (lt system.mindState.value 0)}}
+          <span class="cynicism-active">Цинизм</span>
+        {{else if (gt system.mindState.value 0)}}
+          <span class="courage-active">Кураж</span>
+        {{else}}
+          <span>Нейтрал</span>
+        {{/if}}
+        <span class="mind-value">{{system.mindState.value}}</span>
+      </div>
+      <div class="mind-slider-wrapper">
+        <span class="slider-label-left">Цинизм</span>
+        <input type="range" name="system.mindState.value" 
+               min="{{system.mindState.min}}" 
+               max="{{system.mindState.max}}" 
+               value="{{system.mindState.value}}" 
+               class="mind-slider"/>
+        <span class="slider-label-right">Кураж</span>
+      </div>
+      <div class="mind-ticks">
+        <span>-5</span><span>-4</span><span>-2</span><span>-1</span>
+        <span>0</span>
+        <span>+1</span><span>+2</span><span>+3</span><span>+5</span>
+      </div>
+    </div>
+  </header>
+
+  {{!-- ГЛАВНАЯ СЕТКА (2 колонки) --}}
+  <div class="main-grid">
+    
+    {{!-- ЛЕВАЯ КОЛОНКА (Фото, Защита, Характеристики) --}}
+    <div class="left-column">
+      <div class="portrait-container noir-box">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+      </div>
+
+      {{!-- Блок ЗАЩИТА --}}
+      <div class="noir-box defense-box">
+        <h2 class="box-header">ЗАЩИТА (Defense)</h2>
+        <div class="defense-content">
+          <div class="def-stat evasion">
+            <label>Уклонение</label>
+            <input type="number" name="system.defense.evasion.value" value="{{system.defense.evasion.value}}"/>
+          </div>
+          <div class="armor-icons">
+            <i class="fas fa-shield-alt shield-gold"></i>
+            <i class="fas fa-shield-alt shield-gold"></i>
+          </div>
+          <div class="def-stat armor">
+            <label>Броня</label>
+            <div class="armor-values">
+              <input type="number" name="system.defense.armor.value" value="{{system.defense.armor.value}}"/>
+              <span>/ {{system.defense.armor.max}} ячеек</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{!-- Блок ХАРАКТЕРИСТИКИ --}}
+      <div class="noir-box stats-box">
+        <h2 class="box-header">ХАРАКТЕРИСТИКИ (Stats)</h2>
+        <div class="stats-grid">
+          {{#each system.stats as |stat key|}}
+            <div class="stat-card rollable" data-roll="stat" data-stat="{{key}}">
+              <div class="stat-icon-bg"></div>
+              <label class="stat-label">{{stat.label}}</label>
+              <div class="stat-value">{{numberFormat stat.value sign=true}}</div>
+              <div class="stat-die">D12</div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    {{!-- ПРАВАЯ КОЛОНКА (Статус, Здоровье, Стресс, Особенности) --}}
+    <div class="right-column">
+      <div class="noir-box status-box">
+        <h2 class="box-header">СТАТУС (Status)</h2>
+        
+        <div class="status-content">
+          <div class="health-stress-column">
+            {{!-- ЗДОРОВЬЕ (Пули) --}}
+            <div class="status-group health">
+              <h3>ЗДОРОВЬЕ (HP) <span class="hp-count">{{system.health.value}}/{{system.health.max}}</span></h3>
+              <div class="pills health-pills">
+                {{#each system.health.pills}}
+                  <span class="pill pill-bullet {{#if this}}filled{{/if}}" data-index="{{@index}}"></span>
+                {{/each}}
+              </div>
+              <span class="pills-label">ячейки</span>
+            </div>
+
+            {{!-- СТРЕСС (Круги) --}}
+            <div class="status-group stress">
+              <h3>СТРЕСС <span class="stress-count">{{system.stress.value}}/{{system.stress.max}}</span></h3>
+              <div class="pills stress-pills">
+                {{#each system.stress.pills}}
+                  <span class="pill pill-circle {{#if this}}filled{{/if}}" data-index="{{@index}}"></span>
+                {{/each}}
+              </div>
+              <span class="pills-label">ячейки</span>
+            </div>
+          </div>
+
+          {{!-- ИСТОЩЕНИЕ & ПРЕПАРАТЫ (Капсулы) --}}
+          <div class="exhaustion-column">
+            <div class="status-group exhaustion">
+              <h3>ИСТОЩЕНИЕ & ПРЕПАРАТЫ <span class="ex-count">{{system.exhaustion.value}}/{{system.exhaustion.max}}</span></h3>
+              <div class="pills exhaustion-pills">
+                {{#each system.exhaustion.pills}}
+                  <span class="pill pill-capsule {{#if this}}filled{{/if}}" data-index="{{@index}}"></span>
+                {{/each}}
+              </div>
+              <span class="pills-label">ячейки</span>
+            </div>
+            <button type="button" class="take-substance-btn">ПРИНЯТЬ ПРЕПАРАТ</button>
+          </div>
+        </div>
+
+        {{!-- ИНТЕРВАЛЫ УРОНА (Диапазоны) --}}
+        <div class="damage-thresholds noir-box-inner">
+          {{#each system.health.thresholds as |threshold key|}}
+            <div class="threshold-group">
+              <span class="threshold-range">{{threshold}}</span>
+              <span class="threshold-label">{{localize (concat "NOIR.Threshold" key)}}</span>
+            </div>
+          {{/each}}
+          <span class="range-bands-label">Range Bands</span>
+        </div>
+      </div>
+
+      {{!-- Блок ОСОБЕННОСТИ ПЕРСОНАЖА --}}
+      <div class="noir-box features-box">
+        <h2 class="box-header">ОСОБЕННОСТИ ПЕРСОНАЖА</h2>
+        <div class="features-content">
+          <div class="feature-item">
+            <i class="fas fa-user-circle"></i>
+            <span class="feature-label">РАСА:</span>
+            <input type="text" name="system.biography.race" value="{{system.biography.race}}"/>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-comments"></i>
+            <span class="feature-label">ЯЗЫКИ:</span>
+            <input type="text" name="system.biography.languages" value="{{system.biography.languages}}"/>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-wolf-head"></i>
+            <span class="feature-label">ТАЛАНТЫ / ЧЕРТЫ:</span>
+            <input type="text" name="system.biography.traits" value="{{system.biography.traits}}"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {{!-- ВКЛАДКИ НАВИГАЦИИ (Внизу, как на скрине) --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="description"><i class="fas fa-file-alt"></i> Основное</a>
+    <a class="item" data-tab="items"><i class="fas fa-suitcase"></i> Предметы</a>
+    <a class="item" data-tab="effects"><i class="fas fa-bolt"></i> Эффекты</a>
+    <a class="item" data-tab="notes"><i class="fas fa-sticky-note"></i> Заметки</a>
+  </nav>
+
+</form>

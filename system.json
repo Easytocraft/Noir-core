@@ -1,0 +1,36 @@
+{
+  "id": "noir-core",
+  "title": "Noir System Core",
+  "description": "Система Нуар.",
+  "version": "0.0.1",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "Easytocraft"
+    }
+  ],
+  "esmodules": ["noir-core.mjs"],
+  "styles": ["css/noir.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "ru",
+      "name": "Русский",
+      "path": "lang/en.json"
+    }
+  ],
+  "manifest": "https://raw.githubusercontent.com/Easytocraft/noir-core/main/system.json",
+  "download": "https://github.com/Easytocraft/noir-core/archive/refs/heads/main.zip",
+  "grid": {
+    "type": 1,
+    "distance": 1.5,
+    "units": "м"
+  }
+}
