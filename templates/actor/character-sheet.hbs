@@ -1,29 +1,12 @@
 <form class="{{cssClass}} noir-actor-form" autocomplete="off">
 
-  <!-- ШАПКА -->
+  <!-- ШАПКА (Убран слайдер) -->
   <header class="sheet-header">
     <div class="header-details">
       <h1 class="charname">
         <input name="name" type="text" value="{{actor.name}}" placeholder="Имя Персонажа" />
       </h1>
       <div class="system-subtitle">NOIR SYSTEM CORE v{{system.version}}</div>
-    </div>
-
-    <!-- Слайдер Ментального состояния -->
-    <div class="mind-state-box">
-      <div class="mind-header">
-        <span class="mind-label">{{system.mindState.label}}</span>
-        <span class="mind-value">{{system.mindState.value}}</span>
-      </div>
-      <input type="range" class="mind-slider" name="system.mindState.value" 
-             value="{{system.mindState.value}}" min="-5" max="5" step="1" />
-      <div class="mind-labels">
-        <span>Цинизм -5</span>
-        <span>-4</span><span>-2</span><span>-1</span>
-        <span>0</span>
-        <span>+1</span><span>+2</span><span>+3</span>
-        <span>Кураж +5</span>
-      </div>
     </div>
   </header>
 
@@ -32,7 +15,7 @@
     
     <!-- ЛЕВАЯ КОЛОНКА -->
     <div class="col-left">
-      <!-- Портрет -->
+      <!-- Портрет во всё поле -->
       <div class="portrait-container">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
       </div>
@@ -104,7 +87,7 @@
           </div>
         </div>
 
-        <!-- ПОРОГИ УРОНА (Daggerheart Style) -->
+        <!-- ПОРОГИ УРОНА -->
         <div class="damage-thresholds">
           <div class="threshold-track">
             <div class="threshold-box">
@@ -158,6 +141,27 @@
           <input type="text" name="system.biography.traits" value="{{system.biography.traits}}" />
         </div>
       </div>
+
+      <!-- МЕНТАЛЬНОЕ СОСТОЯНИЕ (Перенесено вниз) -->
+      <div class="block-box mind-box">
+        <h2 class="block-title">МЕНТАЛЬНОЕ СОСТОЯНИЕ</h2>
+        <div class="mind-state-box">
+          <div class="mind-header">
+            <span class="mind-label">{{system.mindState.label}}</span>
+            <span class="mind-value">{{system.mindState.value}}</span>
+          </div>
+          <input type="range" class="mind-slider" name="system.mindState.value" 
+                 value="{{system.mindState.value}}" min="-5" max="5" step="1" />
+          <div class="mind-labels">
+            <span>Цинизм -5</span>
+            <span>-4</span><span>-2</span><span>-1</span>
+            <span>0</span>
+            <span>+1</span><span>+2</span><span>+3</span>
+            <span>Кураж +5</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>

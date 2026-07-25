@@ -10,21 +10,18 @@ form.noir-actor-form {
 
 /* ШАПКА */
 .noir-actor-form .sheet-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border-bottom: 2px solid #111;
-  padding-bottom: 8px;
+  padding-bottom: 6px;
   margin-bottom: 10px;
 }
 
 .noir-actor-form .charname input {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
   border: none;
   border-bottom: 1px dashed #111;
   background: transparent;
-  width: 90%;
+  width: 100%;
 }
 
 .noir-actor-form .system-subtitle {
@@ -32,35 +29,7 @@ form.noir-actor-form {
   color: #555;
 }
 
-/* СЛАЙДЕР */
-.noir-actor-form .mind-state-box {
-  width: 260px;
-  background: #dad3ae;
-  border: 1px solid #111;
-  padding: 6px;
-  border-radius: 4px;
-}
-
-.noir-actor-form .mind-header {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  font-size: 11px;
-  margin-bottom: 2px;
-}
-
-.noir-actor-form .mind-slider {
-  width: 100%;
-}
-
-.noir-actor-form .mind-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 8px;
-  color: #444;
-}
-
-/* ГЛАВНЫЙ ДВУХКОЛОНОЧНЫЙ КАРКАС */
+/* ДВУХКОЛОНОЧНЫЙ КАРКАС */
 .noir-actor-form .sheet-main-wrapper {
   display: flex !important;
   flex-direction: row !important;
@@ -69,7 +38,7 @@ form.noir-actor-form {
 }
 
 .noir-actor-form .col-left {
-  width: 320px !important;
+  width: 310px !important;
   flex-shrink: 0;
 }
 
@@ -97,23 +66,20 @@ form.noir-actor-form {
   text-transform: uppercase;
 }
 
-/* ПОРТРЕТ ПЕРСОНАЖА */
+/* ПОРТРЕТ (ВО ВСЁ ПОЛЕ БЕЗ РАМОК) */
 .noir-actor-form .portrait-container {
   border: 2px solid #111;
-  height: 280px; /* Увеличили высоту под вертикальный арт */
+  height: 380px; /* Фиксируем под вертикальную картинку */
   margin-bottom: 10px;
   background: #000;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .noir-actor-form .portrait-container img.profile-img {
   width: 100%;
   height: 100%;
-  object-fit: contain !important; /* Вписывает арт целиком без КРОПА */
-  object-position: center !important;
+  object-fit: cover !important; /* Картинка полностью заполняет всю область */
+  object-position: center 20% !important; /* Смещаем фокус на шляпу/лицо */
   border: none;
   cursor: pointer;
 }
@@ -156,7 +122,7 @@ form.noir-actor-form {
   font-size: 20px;
 }
 
-/* ХАРАКТЕРИСТИКИ (3 в ряд) */
+/* ХАРАКТЕРИСТИКИ */
 .noir-actor-form .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -252,7 +218,6 @@ form.noir-actor-form {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2px;
 }
 
 .noir-actor-form .threshold-box {
@@ -262,17 +227,17 @@ form.noir-actor-form {
 }
 
 .noir-actor-form .threshold-box input {
-  width: 48px; /* Увеличили ширину плашек под текст "11-15" */
-  height: 32px;
+  width: 48px;
+  height: 30px;
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   background: #fff;
   border: 1.5px solid #111;
 }
 
 .noir-actor-form .th-sub {
-  font-size: 9px;
+  font-size: 8px;
   color: #444;
   margin-top: 2px;
 }
@@ -280,11 +245,10 @@ form.noir-actor-form {
 .noir-actor-form .threshold-banner {
   background: #333;
   color: #fff;
-  font-size: 8px;
+  font-size: 9px;
   font-weight: bold;
-  padding: 4px 3px;
-  clip-path: polygon(5px 0%, 100% 0%, 100% 100%, 5px 100%, 0% 50%);
-  white-space: nowrap;
+  padding: 4px 5px;
+  clip-path: polygon(6px 0%, 100% 0%, 100% 100%, 6px 100%, 0% 50%);
 }
 
 /* БИОГРАФИЯ */
@@ -306,4 +270,35 @@ form.noir-actor-form {
   border-bottom: 1px dashed #111;
   background: transparent;
   padding: 2px 4px;
+}
+
+/* МЕНТАЛЬНОЕ СОСТОЯНИЕ (Внизу карточки) */
+.noir-actor-form .mind-box {
+  margin-top: 10px;
+}
+
+.noir-actor-form .mind-state-box {
+  background: #dad3ae;
+  border: 1px solid #111;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.noir-actor-form .mind-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.noir-actor-form .mind-slider {
+  width: 100%;
+}
+
+.noir-actor-form .mind-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #444;
 }
