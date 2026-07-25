@@ -14,6 +14,12 @@
   ],
   "esmodules": ["noir-core.mjs"],
   "styles": ["css/noir.css"],
+  "documentTypes": {
+    "Actor": {
+      "character": {}
+    },
+    "Item": {}
+  },
   "languages": [
     {
       "lang": "en",
