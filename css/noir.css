@@ -1,182 +1,301 @@
-/* --- СТИЛИ ЛИСТА NOIR CORE --- */
-
-.noir-sheet {
-  background: #e3dec3;
-  color: #1a1a1a;
-  font-family: 'Courier New', Courier, monospace;
+/* --- ГЛОБАЛЬНЫЙ СТИЛЬ ОКНА --- */
+.noir-sheet .window-content,
+form.noir-actor-form {
+  background: #e8e3cc !important;
+  color: #1a1a1a !important;
+  font-family: 'Courier New', Courier, monospace !important;
+  padding: 8px !important;
+  box-sizing: border-box;
 }
 
-.noir-sheet .window-content {
-  background: #e8e3cc;
-  padding: 10px;
-}
-
-/* ЗАГОЛОВКИ БЛОКОВ */
-.block-title {
-  background: #111;
-  color: #fff;
-  font-weight: bold;
-  font-size: 14px;
-  text-align: center;
-  padding: 4px;
-  margin: 0 0 8px 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.block-box {
-  border: 2px solid #111;
-  background: #e2dcb8;
-  padding: 4px;
+/* ШАПКА */
+.noir-actor-form .sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #111;
+  padding-bottom: 8px;
   margin-bottom: 10px;
 }
 
-/* ПОРТРЕТ ПЕРСОНАЖА */
-.portrait-container {
+.noir-actor-form .charname input {
+  font-size: 22px;
+  font-weight: bold;
+  border: none;
+  border-bottom: 1px dashed #111;
+  background: transparent;
+  width: 90%;
+}
+
+.noir-actor-form .system-subtitle {
+  font-size: 11px;
+  color: #555;
+}
+
+/* СЛАЙДЕР */
+.noir-actor-form .mind-state-box {
+  width: 260px;
+  background: #dad3ae;
+  border: 1px solid #111;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.noir-actor-form .mind-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.noir-actor-form .mind-slider {
+  width: 100%;
+}
+
+.noir-actor-form .mind-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  color: #444;
+}
+
+/* ГЛАВНЫЙ ДВУХКОЛОНОЧНЫЙ КАРКАС */
+.noir-actor-form .sheet-main-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 12px !important;
+  width: 100%;
+}
+
+.noir-actor-form .col-left {
+  width: 320px !important;
+  flex-shrink: 0;
+}
+
+.noir-actor-form .col-right {
+  flex: 1 !important;
+  min-width: 0;
+}
+
+/* ОБЩИЕ БЛОКИ */
+.noir-actor-form .block-box {
   border: 2px solid #111;
-  height: 180px;
+  background: #e2dcb8;
+  padding: 6px;
+  margin-bottom: 10px;
+}
+
+.noir-actor-form .block-title {
+  background: #111;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  padding: 3px;
+  margin: -6px -6px 8px -6px;
+  text-transform: uppercase;
+}
+
+/* ПОРТРЕТ */
+.noir-actor-form .portrait-container {
+  border: 2px solid #111;
+  height: 190px;
   margin-bottom: 10px;
   background: #000;
   overflow: hidden;
 }
 
-.portrait-container img.profile-img {
+.noir-actor-form .portrait-container img.profile-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Защита от урезания и растягивания */
-  object-position: top center;
+  object-fit: cover !important;
+  object-position: top center !important;
   border: none;
-}
-
-/* ХАРАКТЕРИСТИКИ */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
-}
-
-.stat-card {
-  border: 2px solid #111;
-  background: #fff;
-  border-radius: 4px;
-  text-align: center;
-  padding: 6px;
   cursor: pointer;
-  transition: transform 0.1s;
 }
 
-.stat-card:hover {
-  background: #f0f0f0;
-  transform: scale(1.02);
-}
-
-.stat-name {
-  display: block;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.stat-value {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* ПОРОГИ УРОНА (DAGGERHEART STYLE) */
-.damage-thresholds {
-  margin: 12px 0;
-  padding: 6px;
-  background: #dad3ae;
-  border: 1px solid #111;
-}
-
-.threshold-track {
+/* ЗАЩИТА */
+.noir-actor-form .defense-stats {
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-content: space-between;
 }
 
-.threshold-box {
+.noir-actor-form .def-item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.threshold-box input {
-  width: 45px;
-  height: 40px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  background: #fff;
-  border: 2px solid #111;
-  border-radius: 4px;
-}
-
-.th-sub {
-  font-size: 10px;
-  color: #555;
-  margin-top: 2px;
-}
-
-.threshold-banner {
-  background: #4a4a4a;
-  color: #fff;
+.noir-actor-form .def-item label {
   font-size: 11px;
   font-weight: bold;
-  padding: 6px 8px;
-  clip-path: polygon(10px 0%, 100% 0%, 100% 100%, 10px 100%, 0% 50%);
-  margin: 0 2px;
+}
+
+.noir-actor-form .def-item input {
+  width: 45px;
+  height: 32px;
   text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  background: #fff;
+  border: 1px solid #111;
 }
 
-/* РЕСУРСЫ И ПИЛСЫ */
-.resources-row {
+.noir-actor-form .armor-values {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.pills {
-  display: flex;
+  align-items: center;
   gap: 4px;
-  margin: 4px 0;
 }
 
-.pill {
-  width: 18px;
-  height: 18px;
+.noir-actor-form .shield-icon {
+  font-size: 20px;
+}
+
+/* ХАРАКТЕРИСТИКИ (3 в ряд) */
+.noir-actor-form .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.noir-actor-form .stat-card {
   border: 2px solid #111;
   background: #fff;
-  border-radius: 3px;
+  border-radius: 4px;
+  text-align: center;
+  padding: 6px 2px;
   cursor: pointer;
 }
 
-.pill.filled {
+.noir-actor-form .stat-card:hover {
+  background: #f0f0f0;
+}
+
+.noir-actor-form .stat-name {
+  display: block;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.noir-actor-form .stat-value {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* СТАТУС & РЕСУРСЫ */
+.noir-actor-form .resources-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.noir-actor-form .resource-group {
+  flex: 1;
+}
+
+.noir-actor-form .res-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.noir-actor-form .pills {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.noir-actor-form .pill {
+  width: 16px;
+  height: 20px;
+  border: 1.5px solid #111;
+  background: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.noir-actor-form .pill.filled {
   background: #8b0000;
 }
 
-.pill.circle {
+.noir-actor-form .pill.circle {
   border-radius: 50%;
+  height: 16px;
 }
 
-.pill.circle.filled {
+.noir-actor-form .pill.circle.filled {
   background: #111;
 }
 
+.noir-actor-form .pills-sub {
+  font-size: 9px;
+  color: #555;
+}
+
+/* ПОРОГИ УРОНА (Daggerheart) */
+.noir-actor-form .damage-thresholds {
+  margin: 10px 0;
+  padding: 6px;
+  background: #dad3ae;
+  border: 1px solid #111;
+}
+
+.noir-actor-form .threshold-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.noir-actor-form .threshold-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.noir-actor-form .threshold-box input {
+  width: 38px;
+  height: 30px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  background: #fff;
+  border: 1.5px solid #111;
+}
+
+.noir-actor-form .th-sub {
+  font-size: 8px;
+  color: #444;
+  margin-top: 2px;
+}
+
+.noir-actor-form .threshold-banner {
+  background: #333;
+  color: #fff;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 4px 5px;
+  clip-path: polygon(6px 0%, 100% 0%, 100% 100%, 6px 100%, 0% 50%);
+}
+
 /* БИОГРАФИЯ */
-.bio-field {
+.noir-actor-form .bio-field {
   display: flex;
   align-items: center;
   margin-bottom: 6px;
 }
 
-.bio-field label {
+.noir-actor-form .bio-field label {
   font-weight: bold;
-  font-size: 11px;
-  width: 130px;
+  font-size: 10px;
+  width: 100px;
 }
 
-.bio-field input {
+.noir-actor-form .bio-field input {
   flex: 1;
   border: none;
   border-bottom: 1px dashed #111;

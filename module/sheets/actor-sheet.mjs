@@ -8,8 +8,8 @@ export class NoirActorSheet extends ActorSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["noir-sheet", "sheet", "actor"],
       template: "systems/noir-core/templates/actor/character-sheet.hbs",
-      width: 720,
-      height: 750,
+      width: 820,
+      height: 680,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "primary" }]
     });
   }

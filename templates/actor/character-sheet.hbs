@@ -1,4 +1,4 @@
-<form class="{{cssClass}} sheet-container" autocomplete="off">
+<form class="{{cssClass}} noir-actor-form" autocomplete="off">
 
   <!-- ШАПКА -->
   <header class="sheet-header">
@@ -27,141 +27,138 @@
     </div>
   </header>
 
-  <!-- СЕТКА ЛИСТА -->
-  <section class="sheet-body">
-    <div class="grid grid-2col">
-      
-      <!-- ЛЕВАЯ КОЛОНКА -->
-      <div class="col-left">
-        <!-- Портрет персонажа -->
-        <div class="portrait-container">
-          <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
-        </div>
+  <!-- ДВУХКОЛОНОЧНЫЙ КАРКАС -->
+  <div class="sheet-main-wrapper">
+    
+    <!-- ЛЕВАЯ КОЛОНКА -->
+    <div class="col-left">
+      <!-- Портрет -->
+      <div class="portrait-container">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+      </div>
 
-        <!-- ЗАЩИТА -->
-        <div class="block-box defense-box">
-          <h2 class="block-title">ЗАЩИТА (Defense)</h2>
-          <div class="defense-stats">
-            <div class="def-item">
-              <label>Уклонение</label>
-              <input type="text" name="system.defense.evasion.value" value="{{system.defense.evasion.value}}" />
-            </div>
-            <div class="shield-icon"><i class="fas fa-shield-alt"></i></div>
-            <div class="def-item">
-              <label>Броня</label>
-              <div class="armor-values">
-                <input type="text" name="system.defense.armor.value" value="{{system.defense.armor.value}}" />
-                <span>/ {{system.defense.armor.max}} ячеек</span>
-              </div>
-            </div>
+      <!-- ЗАЩИТА -->
+      <div class="block-box">
+        <h2 class="block-title">ЗАЩИТА (Defense)</h2>
+        <div class="defense-stats">
+          <div class="def-item">
+            <label>Уклонение</label>
+            <input type="text" name="system.defense.evasion.value" value="{{system.defense.evasion.value}}" />
           </div>
-        </div>
-
-        <!-- ХАРАКТЕРИСТИКИ -->
-        <div class="block-box stats-box">
-          <h2 class="block-title">ХАРАКТЕРИСТИКИ (Stats)</h2>
-          <div class="stats-grid">
-            {{#each system.stats as |stat key|}}
-            <div class="stat-card rollable" data-stat="{{key}}">
-              <span class="stat-name">{{stat.label}}</span>
-              <span class="stat-value">{{#if (gte stat.value 0)}}+{{/if}}{{stat.value}}</span>
+          <div class="shield-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="def-item">
+            <label>Броня</label>
+            <div class="armor-values">
+              <input type="text" name="system.defense.armor.value" value="{{system.defense.armor.value}}" />
+              <span>/ {{system.defense.armor.max}}</span>
             </div>
-            {{/each}}
           </div>
         </div>
       </div>
 
-      <!-- ПРАВАЯ КОЛОНКА -->
-      <div class="col-right">
+      <!-- ХАРАКТЕРИСТИКИ -->
+      <div class="block-box">
+        <h2 class="block-title">ХАРАКТЕРИСТИКИ (Stats)</h2>
+        <div class="stats-grid">
+          {{#each system.stats as |stat key|}}
+          <div class="stat-card rollable" data-stat="{{key}}">
+            <span class="stat-name">{{stat.label}}</span>
+            <span class="stat-value">{{#if (gte stat.value 0)}}+{{/if}}{{stat.value}}</span>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <!-- ПРАВАЯ КОЛОНКА -->
+    <div class="col-right">
+      <!-- СТАТУС -->
+      <div class="block-box">
+        <h2 class="block-title">СТАТУС (Status)</h2>
         
-        <!-- СТАТУС (Здоровье, Истощение, Пороги) -->
-        <div class="block-box status-box">
-          <h2 class="block-title">СТАТУС (Status)</h2>
-          
-          <div class="resources-row">
-            <div class="resource-group">
-              <div class="res-header">
-                <label>ЗДОРОВЬЕ (HP)</label>
-                <span>{{system.health.value}}/{{system.health.max}}</span>
-              </div>
-              <div class="pills health-pills">
-                {{#each system.health.pills}}
-                <span class="pill {{#if this}}filled{{/if}}" data-index="{{@index}}"></span>
-                {{/each}}
-              </div>
-              <span class="pills-sub">ячейки</span>
-            </div>
-
-            <div class="resource-group">
-              <div class="res-header">
-                <label>ИСТОЩЕНИЕ & ПРЕПАРАТЫ</label>
-                <span>{{system.exhaustion.value}}/{{system.exhaustion.max}}</span>
-              </div>
-              <div class="pills exhaustion-pills">
-                {{#each system.exhaustion.pills}}
-                <span class="pill {{#if this}}filled{{/if}}" data-index="{{@index}}"></span>
-                {{/each}}
-              </div>
-              <span class="pills-sub">ячейки</span>
-            </div>
-          </div>
-
-          <!-- ПОРОГИ УРОНА (Thresholds / Range Bands как в Daggerheart) -->
-          <div class="damage-thresholds">
-            <div class="threshold-track">
-              <div class="threshold-box">
-                <input type="text" name="system.health.thresholds.minor" value="{{system.health.thresholds.minor}}" />
-                <span class="th-sub">1 рана</span>
-              </div>
-              <div class="threshold-banner">◀ ЛЕГКИЙ</div>
-              
-              <div class="threshold-box">
-                <input type="text" name="system.health.thresholds.major" value="{{system.health.thresholds.major}}" />
-                <span class="th-sub">2 раны</span>
-              </div>
-              <div class="threshold-banner">◀ СРЕДНИЙ</div>
-              
-              <div class="threshold-box">
-                <input type="text" name="system.health.thresholds.severe" value="{{system.health.thresholds.severe}}" />
-                <span class="th-sub">3 раны</span>
-              </div>
-              <div class="threshold-banner">◀ ТЯЖЕЛЫЙ</div>
-            </div>
-          </div>
-
-          <!-- СТРЕСС -->
-          <div class="resource-group stress-group">
+        <div class="resources-row">
+          <div class="resource-group">
             <div class="res-header">
-              <label>СТРЕСС</label>
-              <span>{{system.stress.value}}/{{system.stress.max}}</span>
+              <label>ЗДОРОВЬЕ (HP)</label>
+              <span>{{system.health.value}}/{{system.health.max}}</span>
             </div>
-            <div class="pills stress-pills">
-              {{#each system.stress.pills}}
-              <span class="pill circle {{#if this}}filled{{/if}}" data-index="{{@index}}"></span>
-            {{/each}}
+            <div class="pills health-pills">
+              {{#each system.health.pills}}
+              <span class="pill {{#if this}}filled{{/if}}" data-index="{{@index}}"></span>
+              {{/each}}
+            </div>
+            <span class="pills-sub">ячейки</span>
+          </div>
+
+          <div class="resource-group">
+            <div class="res-header">
+              <label>ИСТОЩЕНИЕ & ПРЕПАРАТЫ</label>
+              <span>{{system.exhaustion.value}}/{{system.exhaustion.max}}</span>
+            </div>
+            <div class="pills exhaustion-pills">
+              {{#each system.exhaustion.pills}}
+              <span class="pill {{#if this}}filled{{/if}}" data-index="{{@index}}"></span>
+              {{/each}}
             </div>
             <span class="pills-sub">ячейки</span>
           </div>
         </div>
 
-        <!-- ОСОБЕННОСТИ ПЕРСОНАЖА -->
-        <div class="block-box bio-box">
-          <h2 class="block-title">ОСОБЕННОСТИ ПЕРСОНАЖА</h2>
-          <div class="bio-field">
-            <label><i class="fas fa-user"></i> РАСА:</label>
-            <input type="text" name="system.biography.race" value="{{system.biography.race}}" />
-          </div>
-          <div class="bio-field">
-            <label><i class="fas fa-comments"></i> ЯЗЫКИ:</label>
-            <input type="text" name="system.biography.languages" value="{{system.biography.languages}}" />
-          </div>
-          <div class="bio-field">
-            <label><i class="fas fa-star"></i> ТАЛАНТЫ / ЧЕРТЫ:</label>
-            <input type="text" name="system.biography.traits" value="{{system.biography.traits}}" />
+        <!-- ПОРОГИ УРОНА (Daggerheart Style) -->
+        <div class="damage-thresholds">
+          <div class="threshold-track">
+            <div class="threshold-box">
+              <input type="text" name="system.health.thresholds.minor" value="{{system.health.thresholds.minor}}" />
+              <span class="th-sub">1 рана</span>
+            </div>
+            <div class="threshold-banner">◀ ЛЕГКИЙ</div>
+            
+            <div class="threshold-box">
+              <input type="text" name="system.health.thresholds.major" value="{{system.health.thresholds.major}}" />
+              <span class="th-sub">2 раны</span>
+            </div>
+            <div class="threshold-banner">◀ СРЕДНИЙ</div>
+            
+            <div class="threshold-box">
+              <input type="text" name="system.health.thresholds.severe" value="{{system.health.thresholds.severe}}" />
+              <span class="th-sub">3 раны</span>
+            </div>
+            <div class="threshold-banner">◀ ТЯЖЕЛЫЙ</div>
           </div>
         </div>
 
+        <!-- СТРЕСС -->
+        <div class="resource-group stress-group">
+          <div class="res-header">
+            <label>СТРЕСС</label>
+            <span>{{system.stress.value}}/{{system.stress.max}}</span>
+          </div>
+          <div class="pills stress-pills">
+            {{#each system.stress.pills}}
+            <span class="pill circle {{#if this}}filled{{/if}}" data-index="{{@index}}"></span>
+            {{/each}}
+          </div>
+          <span class="pills-sub">ячейки</span>
+        </div>
+      </div>
+
+      <!-- ОСОБЕННОСТИ ПЕРСОНАЖА -->
+      <div class="block-box">
+        <h2 class="block-title">ОСОБЕННОСТИ ПЕРСОНАЖА</h2>
+        <div class="bio-field">
+          <label><i class="fas fa-user"></i> РАСА:</label>
+          <input type="text" name="system.biography.race" value="{{system.biography.race}}" />
+        </div>
+        <div class="bio-field">
+          <label><i class="fas fa-comments"></i> ЯЗЫКИ:</label>
+          <input type="text" name="system.biography.languages" value="{{system.biography.languages}}" />
+        </div>
+        <div class="bio-field">
+          <label><i class="fas fa-star"></i> ЧЕРТЫ:</label>
+          <input type="text" name="system.biography.traits" value="{{system.biography.traits}}" />
+        </div>
       </div>
     </div>
-  </section>
+
+  </div>
 </form>
