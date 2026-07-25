@@ -2,7 +2,7 @@
   "id": "noir-core",
   "title": "Noir System Core",
   "description": "Система Нуар.",
-  "version": "0.0.1-alpha-3.2",
+  "version": "0.0.1-alpha-0.3",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
