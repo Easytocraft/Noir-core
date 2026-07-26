@@ -1,304 +1,227 @@
-/* --- ГЛОБАЛЬНЫЙ СТИЛЬ ОКНА --- */
-.noir-sheet .window-content,
-form.noir-actor-form {
-  background: #e8e3cc !important;
-  color: #1a1a1a !important;
-  font-family: 'Courier New', Courier, monospace !important;
-  padding: 8px !important;
-  box-sizing: border-box;
+/* Общие настройки темы сепии/газетной бумаги */
+.noir-sheet-form {
+  background: #22201d;
+  color: #d1c7b7;
+  font-family: "Courier New", Courier, monospace;
+  padding: 12px;
 }
 
-/* ШАПКА */
-.noir-actor-form .sheet-header {
-  border-bottom: 2px solid #111;
-  padding-bottom: 6px;
-  margin-bottom: 10px;
+.sheet-main-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 15px;
 }
 
-.noir-actor-form .charname input {
-  font-size: 24px;
-  font-weight: bold;
-  border: none;
-  border-bottom: 1px dashed #111;
-  background: transparent;
+/* Портрет */
+.portrait-container {
   width: 100%;
-}
-
-.noir-actor-form .system-subtitle {
-  font-size: 11px;
-  color: #555;
-}
-
-/* ДВУХКОЛОНОЧНЫЙ КАРКАС */
-.noir-actor-form .sheet-main-wrapper {
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 12px !important;
-  width: 100%;
-}
-
-.noir-actor-form .col-left {
-  width: 310px !important;
-  flex-shrink: 0;
-}
-
-.noir-actor-form .col-right {
-  flex: 1 !important;
-  min-width: 0;
-}
-
-/* ОБЩИЕ БЛОКИ */
-.noir-actor-form .block-box {
-  border: 2px solid #111;
-  background: #e2dcb8;
-  padding: 6px;
-  margin-bottom: 10px;
-}
-
-.noir-actor-form .block-title {
-  background: #111;
-  color: #fff;
-  font-weight: bold;
-  font-size: 12px;
-  text-align: center;
-  padding: 3px;
-  margin: -6px -6px 8px -6px;
-  text-transform: uppercase;
-}
-
-/* ПОРТРЕТ (ВО ВСЁ ПОЛЕ БЕЗ РАМОК) */
-.noir-actor-form .portrait-container {
-  border: 2px solid #111;
-  height: 380px; /* Фиксируем под вертикальную картинку */
-  margin-bottom: 10px;
-  background: #000;
+  height: 320px;
+  border: 2px solid #4a4338;
+  background: #121110;
   overflow: hidden;
 }
 
-.noir-actor-form .portrait-container img.profile-img {
+.portrait-container img.profile-img {
   width: 100%;
   height: 100%;
-  object-fit: cover !important; /* Картинка полностью заполняет всю область */
-  object-position: center 20% !important; /* Смещаем фокус на шляпу/лицо */
+  object-fit: cover;
   border: none;
-  cursor: pointer;
+  filter: grayscale(80%) sepia(20%);
 }
 
-/* ЗАЩИТА */
-.noir-actor-form .defense-stats {
+.character-name-box input {
+  width: 100%;
+  margin-top: 8px;
+  background: #191816;
+  color: #f0e6d2;
+  border: 1px solid #4a4338;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
+}
+
+/* Статы */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.stat-card {
+  background: #2a2723;
+  border: 1px solid #4a4338;
+  padding: 6px;
+  text-align: center;
+}
+
+.stat-card .stat-label {
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  color: #a69882;
+}
+
+.stat-card input {
+  width: 50px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Секции */
+.section-box {
+  background: #282521;
+  border: 1px solid #4a4338;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #a69882;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #3d372e;
+}
+
+/* Броня и Уклонение */
+.defense-box {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.noir-actor-form .def-item {
+.def-item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.noir-actor-form .def-item label {
+.def-label {
   font-size: 11px;
-  font-weight: bold;
-}
-
-.noir-actor-form .def-item input {
-  width: 45px;
-  height: 32px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  background: #fff;
-  border: 1px solid #111;
-}
-
-.noir-actor-form .armor-values {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.noir-actor-form .shield-icon {
-  font-size: 20px;
-}
-
-/* ХАРАКТЕРИСТИКИ */
-.noir-actor-form .stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-}
-
-.noir-actor-form .stat-card {
-  border: 2px solid #111;
-  background: #fff;
-  border-radius: 4px;
-  text-align: center;
-  padding: 6px 2px;
-  cursor: pointer;
-}
-
-.noir-actor-form .stat-card:hover {
-  background: #f0f0f0;
-}
-
-.noir-actor-form .stat-name {
-  display: block;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-.noir-actor-form .stat-value {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-/* СТАТУС & РЕСУРСЫ */
-.noir-actor-form .resources-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.noir-actor-form .resource-group {
-  flex: 1;
-}
-
-.noir-actor-form .res-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  font-weight: bold;
+  color: #a69882;
   margin-bottom: 4px;
 }
 
-.noir-actor-form .pills {
+.evasion-icon-wrapper, .vest-icon-wrapper {
+  position: relative;
   display: flex;
-  gap: 3px;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
-.noir-actor-form .pill {
-  width: 16px;
-  height: 20px;
-  border: 1.5px solid #111;
-  background: #fff;
-  border-radius: 2px;
-  cursor: pointer;
+.evasion-icon-wrapper i, .vest-icon-wrapper i {
+  font-size: 38px;
+  color: #4a4338;
 }
 
-.noir-actor-form .pill.filled {
-  background: #8b0000;
+.evasion-icon-wrapper input, .vest-icon-wrapper input {
+  position: absolute;
+  width: 30px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
 }
 
-.noir-actor-form .pill.circle {
-  border-radius: 50%;
-  height: 16px;
-}
-
-.noir-actor-form .pill.circle.filled {
-  background: #111;
-}
-
-.noir-actor-form .pills-sub {
-  font-size: 9px;
-  color: #555;
-}
-
-/* ПОРОГИ УРОНА (Daggerheart) */
-.noir-actor-form .damage-thresholds {
-  margin: 10px 0;
-  padding: 6px;
-  background: #dad3ae;
-  border: 1px solid #111;
-}
-
-.noir-actor-form .threshold-track {
+/* Маркеры */
+.marker-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.noir-actor-form .threshold-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.noir-actor-form .threshold-box input {
-  width: 48px;
-  height: 30px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: bold;
-  background: #fff;
-  border: 1.5px solid #111;
-}
-
-.noir-actor-form .th-sub {
-  font-size: 8px;
-  color: #444;
-  margin-top: 2px;
-}
-
-.noir-actor-form .threshold-banner {
-  background: #333;
-  color: #fff;
-  font-size: 9px;
-  font-weight: bold;
-  padding: 4px 5px;
-  clip-path: polygon(6px 0%, 100% 0%, 100% 100%, 6px 100%, 0% 50%);
-}
-
-/* БИОГРАФИЯ */
-.noir-actor-form .bio-field {
-  display: flex;
-  align-items: center;
   margin-bottom: 6px;
 }
 
-.noir-actor-form .bio-field label {
-  font-weight: bold;
-  font-size: 10px;
-  width: 100px;
-}
-
-.noir-actor-form .bio-field input {
-  flex: 1;
-  border: none;
-  border-bottom: 1px dashed #111;
-  background: transparent;
-  padding: 2px 4px;
-}
-
-/* МЕНТАЛЬНОЕ СОСТОЯНИЕ (Внизу карточки) */
-.noir-actor-form .mind-box {
-  margin-top: 10px;
-}
-
-.noir-actor-form .mind-state-box {
-  background: #dad3ae;
-  border: 1px solid #111;
-  padding: 6px;
-  border-radius: 4px;
-}
-
-.noir-actor-form .mind-header {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
+.marker-label {
   font-size: 12px;
+  width: 90px;
+  color: #c2b59b;
+}
+
+.pills .pill {
+  font-size: 16px;
+  color: #4a4338;
+  cursor: pointer;
+  margin: 0 3px;
+  transition: color 0.2s ease;
+}
+
+.pills .pill.active {
+  color: #b03a2e; /* Красный нуарный акцент */
+}
+
+.pills .bulb-pill.active {
+  color: #f39c12; /* Желтый свет для Надежды */
+}
+
+/* Пороги Урона */
+.thresholds-row {
+  display: flex;
+  gap: 8px;
+}
+
+.threshold-item {
+  flex: 1;
+  text-align: center;
+}
+
+.threshold-item .badge {
+  font-size: 10px;
+  color: #a69882;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.threshold-item input {
+  width: 100%;
+  background: #191816;
+  border: 1px solid #4a4338;
+  color: #fff;
+  text-align: center;
+}
+
+/* Биография */
+.bio-row {
+  display: flex;
+  align-items: center;
   margin-bottom: 4px;
 }
 
-.noir-actor-form .mind-slider {
-  width: 100%;
+.bio-row label {
+  width: 70px;
+  font-size: 11px;
+  color: #a69882;
 }
 
-.noir-actor-form .mind-labels {
+.bio-row input {
+  flex: 1;
+  background: #191816;
+  border: 1px solid #4a4338;
+  color: #d1c7b7;
+  padding: 3px;
+}
+
+/* Слайдер */
+.mind-labels {
   display: flex;
   justify-content: space-between;
-  font-size: 9px;
-  color: #444;
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.label-cynicism { color: #b03a2e; }
+.label-neutral  { color: #a69882; }
+.label-courage  { color: #27ae60; }
+
+.mind-slider {
+  width: 100%;
+  accent-color: #b03a2e;
 }

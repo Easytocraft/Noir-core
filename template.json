@@ -2,49 +2,42 @@
   "Actor": {
     "types": ["character"],
     "character": {
-      "mindState": {
-        "value": -2,
-        "min": -5,
-        "max": 5,
-        "label": "Цинизм"
+      "stats": {
+        "strength": { "value": 10 },
+        "agility": { "value": 10 },
+        "intellect": { "value": 10 },
+        "eloquence": { "value": 10 },
+        "endurance": { "value": 10 },
+        "luck": { "value": 10 }
       },
       "defense": {
-        "evasion": { "value": 11, "label": "Уклонение" },
-        "armor": { "value": 2, "max": 4, "label": "Броня" }
-      },
-      "stats": {
-        "strength": { "value": -2, "label": "Сила" },
-        "agility": { "value": -1, "label": "Ловкость" },
-        "intellect": { "value": 3, "label": "Интеллект" },
-        "eloquence": { "value": -2, "label": "Красноречие" },
-        "endurance": { "value": 0, "label": "Выносливость" },
-        "luck": { "value": 1, "label": "Удача" }
+        "evasion": { "value": 10 },
+        "armor": { "value": 0 }
       },
       "health": {
-        "value": 5,
-        "max": 6,
-        "pills": [true, true, true, true, true, false],
+        "pills": [false, false, false, false, false, false, false, false],
         "thresholds": {
           "minor": "1-5",
           "major": "6-10",
-          "severe": "11-15",
-          "massive": "16-20"
+          "severe": "11+"
         }
       },
       "stress": {
-        "value": 2,
-        "max": 6,
-        "pills": [true, true, false, false, false, false]
+        "pills": [false, false, false, false, false, false, false, false]
       },
       "exhaustion": {
-        "value": 3,
-        "max": 4,
-        "pills": [true, true, true, false]
+        "pills": [false, false, false, false]
+      },
+      "hope": {
+        "pills": [false, false, false, false, false, false]
       },
       "biography": {
         "race": "Человек",
-        "languages": "Русский, Английский",
-        "traits": "\"Ночной Волк\""
+        "languages": "Русский, Уличный жаргон",
+        "traits": ""
+      },
+      "mindState": {
+        "value": 0
       }
     }
   }
