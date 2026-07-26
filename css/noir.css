@@ -4,12 +4,35 @@
 /* NOIR-CORE SYSTEM - ATMOSPHERIC NOIR THEME  */
 /* ========================================== */
 
+/* Сброс box-sizing: без этого padding/border у элементов внутри
+   .sheet-main-grid плюсуются поверх заданной ширины колонки, и всё
+   вылезает за края блоков (отсюда "наезжающие" иконки/поля). */
+.window-app.noir-sheet .window-content,
+.window-app.noir-sheet .window-content *,
+.window-app.noir-sheet .window-content *::before,
+.window-app.noir-sheet .window-content *::after {
+  box-sizing: border-box;
+}
+
 /* Главное окно Foundry VTT */
 .window-app.noir-sheet .window-content {
   background: #11100f !important;
   color: #c0b4a0 !important;
   font-family: 'Special Elite', 'Courier New', monospace !important;
   padding: 12px !important;
+}
+
+/* Тёмный скроллбар, чтобы стандартный светлый скролл Foundry
+   не выбивался из атмосферы */
+.window-app.noir-sheet .window-content::-webkit-scrollbar {
+  width: 10px;
+}
+.window-app.noir-sheet .window-content::-webkit-scrollbar-track {
+  background: #0d0c0b;
+}
+.window-app.noir-sheet .window-content::-webkit-scrollbar-thumb {
+  background: #3d352b;
+  border: 2px solid #0d0c0b;
 }
 
 /* Форма листа - Имитация папки с делом */
@@ -43,6 +66,16 @@
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 16px;
+  align-items: start;
+}
+
+/* Лист изменяемого размера (resizable: true в actor-sheet.mjs) —
+   если окно сузить меньше ~600px, колонки складываются друг под
+   друга вместо схлопывания портрета/полей */
+@media (max-width: 600px) {
+  .sheet-main-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ------------------------------------------ */
@@ -169,16 +202,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
 }
 
 .evasion-icon-wrapper i, .vest-icon-wrapper i {
   font-size: 40px;
   color: #2e2820;
+  line-height: 1;
 }
 
 .evasion-icon-wrapper input, .vest-icon-wrapper input {
   position: absolute;
-  width: 35px !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px !important;
+  height: 24px;
+  padding: 0;
   background: transparent !important;
   border: none !important;
   font-weight: bold;
@@ -191,7 +233,7 @@
 .marker-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
   margin-bottom: 6px;
   background: #0a0a09;
   padding: 6px 10px;
@@ -199,17 +241,26 @@
 }
 
 .marker-label {
+  flex: 0 0 auto;
   font-size: 12px;
   width: 90px;
   color: #a39580;
   font-weight: bold;
 }
 
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .pills .pill {
   font-size: 16px;
   color: #2e2820;
   cursor: pointer;
-  margin: 0 3px;
+  line-height: 1;
   transition: all 0.2s ease;
 }
 

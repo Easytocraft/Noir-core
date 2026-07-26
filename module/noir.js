@@ -1,4 +1,4 @@
-import { NoirActorSheet } from "./actor-sheet.js";
+import { NoirActorSheet } from "./sheets/actor-sheet.mjs";
 
 Hooks.once("init", async function () {
   console.log("Noir-Core | Initializing Noir Core System...");
