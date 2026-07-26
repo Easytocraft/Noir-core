@@ -4,17 +4,17 @@
     {{!-- ЛЕВАЯ КОЛОНКА --}}
     <div class="left-column">
       
-      {{!-- Блок портрета --}}
+      {{!-- Портрет --}}
       <div class="portrait-container">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
       </div>
 
-      {{!-- Имя персонажа --}}
+      {{!-- Имя Персонажа --}}
       <div class="character-name-box">
         <input name="name" type="text" value="{{actor.name}}" placeholder="Имя Персонажа..." />
       </div>
 
-      {{!-- Характеристики (Статы) --}}
+      {{!-- Характеристики --}}
       <div class="stats-grid">
         <div class="stat-card rollable" data-stat="strength">
           <span class="stat-label">СИЛА</span>
@@ -47,7 +47,7 @@
     {{!-- ПРАВАЯ КОЛОНКА --}}
     <div class="right-column">
       
-      {{!-- Блок Защиты (Уклонение и Броня) --}}
+      {{!-- Защита --}}
       <div class="section-box defense-box">
         <div class="def-item evasion-item">
           <span class="def-label">УКЛОНЕНИЕ</span>
@@ -65,23 +65,21 @@
         </div>
       </div>
 
-      {{!-- Трекер Маркеров --}}
+      {{!-- Маркеры --}}
       <div class="section-box markers-box">
         <div class="section-title">Маркеры</div>
 
-        {{!-- Здоровье (Пули) --}}
         <div class="marker-row">
           <span class="marker-label">Здоровье</span>
           <div class="pills health-pills">
             {{#each system.health.pills}}
               <span class="pill bullet-pill {{#if this}}active{{/if}}" data-index="{{@index}}">
-                <i class="fas fa-bullet"></i>
+                <i class="fas fa-bullseye"></i>
               </span>
             {{/each}}
           </div>
         </div>
 
-        {{!-- Стресс (Сигареты) --}}
         <div class="marker-row">
           <span class="marker-label">Стресс</span>
           <div class="pills stress-pills">
@@ -93,7 +91,6 @@
           </div>
         </div>
 
-        {{!-- Истощение (Таблетки - ровно 4 ячейки) --}}
         <div class="marker-row">
           <span class="marker-label">Истощение</span>
           <div class="pills exhaustion-pills">
@@ -105,7 +102,6 @@
           </div>
         </div>
 
-        {{!-- Надежда (Лампочки) --}}
         <div class="marker-row">
           <span class="marker-label">Надежда</span>
           <div class="pills hope-pills">
@@ -154,7 +150,7 @@
         </div>
       </div>
 
-      {{!-- Слайдер Состояния Ума (Цинизм / Кураж) --}}
+      {{!-- Слайдер --}}
       <div class="section-box mind-box">
         <div class="mind-labels">
           <span class="label-cynicism">ЦИНИЗМ (-5)</span>

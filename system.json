@@ -1,10 +1,10 @@
 {
   "id": "noir-core",
-  "title": "Noir System Core",
-  "description": "Система Нуар.",
-  "version": "0.0.1-alpha-0.0.1.2",
+  "title": "Noir Core System",
+  "description": "Нуарная система для Foundry VTT",
+  "version": "0.0.0.1-alpha-0.1",
   "compatibility": {
-    "minimum": "13",
+    "minimum": "12",
     "verified": "13"
   },
   "authors": [
@@ -12,31 +12,12 @@
       "name": "Easytocraft"
     }
   ],
-  "esmodules": ["noir-core.mjs"],
-  "styles": ["css/noir.css"],
-  "documentTypes": {
-    "Actor": {
-      "character": {}
-    },
-    "Item": {}
-  },
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    },
-    {
-      "lang": "ru",
-      "name": "Русский",
-      "path": "lang/en.json"
-    }
+  "esmodules": [
+    "module/noir.js"
   ],
-  "manifest": "https://raw.githubusercontent.com/Easytocraft/noir-core/main/system.json",
-  "download": "https://github.com/Easytocraft/noir-core/archive/refs/heads/main.zip",
-  "grid": {
-    "type": 1,
-    "distance": 1.5,
-    "units": "м"
-  }
+  "styles": [
+    "css/noir.css"
+  ],
+  "manifest": "https://raw.githubusercontent.com/Easytocraft/Noir-core/main/system.json",
+  "download": "https://github.com/Easytocraft/Noir-core/archive/refs/heads/main.zip"
 }
