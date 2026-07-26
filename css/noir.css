@@ -1,54 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
 /* ========================================== */
-/* NOIR-CORE SYSTEM - DARK NOIR STYLE         */
+/* NOIR-CORE SYSTEM - ATMOSPHERIC NOIR THEME  */
 /* ========================================== */
 
-/* 1. Главное окно Foundry */
+/* Главное окно Foundry VTT */
 .window-app.noir-sheet .window-content {
-  background: #141312 !important; /* Тёмно-угольный фон */
-  color: #c9bfb0 !important;
-  font-family: "Courier New", Courier, monospace !important;
-  padding: 10px !important;
+  background: #11100f !important;
+  color: #c0b4a0 !important;
+  font-family: 'Special Elite', 'Courier New', monospace !important;
+  padding: 12px !important;
 }
 
-/* 2. Обёртка формы */
+/* Форма листа - Имитация папки с делом */
 .window-app.noir-sheet form {
-  height: 100%;
-  background: #1c1a17;
-  border: 1px solid #3d362d;
-  padding: 10px;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9);
+  background: radial-gradient(circle, #1a1816 0%, #0d0c0b 100%);
+  border: 2px solid #2e2820;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.8);
+  padding: 14px;
+  position: relative;
 }
 
-/* 3. Перекрытие всех инпутов Foundry */
+/* Перекрытие стандартных инпутов Foundry */
 .window-app.noir-sheet input[type="text"],
 .window-app.noir-sheet input[type="number"] {
-  background: #0f0e0d !important;
-  color: #f0e6d2 !important;
-  border: 1px solid #3d362d !important;
-  font-family: "Courier New", Courier, monospace !important;
+  background: #080807 !important;
+  color: #e6dac8 !important;
+  border: 1px solid #3d352b !important;
+  font-family: 'Special Elite', monospace !important;
   border-radius: 0px !important;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.8) !important;
 }
 
 .window-app.noir-sheet input[type="text"]:focus,
 .window-app.noir-sheet input[type="number"]:focus {
   border-color: #8b0000 !important;
-  box-shadow: 0 0 5px rgba(139, 0, 0, 0.6) !important;
+  box-shadow: 0 0 8px rgba(139, 0, 0, 0.7) !important;
 }
 
-/* 4. Сетка */
+/* Сетка */
 .sheet-main-grid {
   display: grid;
   grid-template-columns: 280px 1fr;
-  gap: 15px;
+  gap: 16px;
 }
 
-/* 5. Портрет */
+/* ------------------------------------------ */
+/* ЛЕВАЯ КОЛОНКА                              */
+/* ------------------------------------------ */
+
+/* Портрет персонажа */
 .portrait-container {
   width: 100%;
   height: 300px;
-  border: 2px solid #3d362d;
-  background: #080808;
-  overflow: hidden;
+  border: 2px solid #3d352b;
+  background: #050505;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.8);
 }
 
 .portrait-container img.profile-img {
@@ -56,45 +63,51 @@
   height: 100%;
   object-fit: cover;
   border: none !important;
-  filter: grayscale(100%) contrast(120%);
+  filter: grayscale(100%) contrast(130%) brightness(90%);
 }
 
+/* Имя */
 .character-name-box input {
   width: 100%;
-  margin-top: 8px;
-  font-size: 16px !important;
+  margin-top: 10px;
+  font-size: 18px !important;
   font-weight: bold;
   text-align: center;
   padding: 6px;
   text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #f5ebd8 !important;
+  border: 1px solid #5a1919 !important; /* Легкий штрих бордового */
 }
 
-/* 6. Карточки Характеристик */
+/* Характеристики (Статы) */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .stat-card {
-  background: #24211c;
-  border: 1px solid #3d362d;
+  background: #141210;
+  border: 1px solid #332c23;
   padding: 6px;
   text-align: center;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 .stat-card:hover {
   border-color: #8b0000;
+  background: #1a1414;
 }
 
 .stat-card .stat-label {
   display: block;
   font-size: 11px;
   font-weight: bold;
-  color: #8c806e;
+  color: #7a6e5d;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .stat-card input {
@@ -104,27 +117,34 @@
   font-size: 22px !important;
   font-weight: bold;
   text-align: center;
+  color: #ffffff !important;
+  box-shadow: none !important;
 }
 
-/* 7. Секции правой колонки */
+/* ------------------------------------------ */
+/* ПРАВАЯ КОЛОНКА                             */
+/* ------------------------------------------ */
+
 .section-box {
-  background: #24211c;
-  border: 1px solid #3d362d;
+  background: #141210;
+  border: 1px solid #2e2820;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
 }
 
 .section-title {
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
-  color: #8c806e;
+  color: #8b0000; /* Нуарный бордовый акцент */
   font-weight: bold;
+  letter-spacing: 1.5px;
   margin-bottom: 8px;
-  border-bottom: 1px solid #3d362d;
-  padding-bottom: 2px;
+  border-bottom: 1px dashed #3d352b;
+  padding-bottom: 3px;
 }
 
-/* Защита */
+/* Броня и Уклонение */
 .defense-box {
   display: flex;
   justify-content: space-around;
@@ -139,7 +159,7 @@
 
 .def-label {
   font-size: 11px;
-  color: #8c806e;
+  color: #7a6e5d;
   font-weight: bold;
   margin-bottom: 4px;
 }
@@ -153,7 +173,7 @@
 
 .evasion-icon-wrapper i, .vest-icon-wrapper i {
   font-size: 40px;
-  color: #3d362d;
+  color: #2e2820;
 }
 
 .evasion-icon-wrapper input, .vest-icon-wrapper input {
@@ -164,6 +184,7 @@
   font-weight: bold;
   font-size: 18px !important;
   text-align: center;
+  box-shadow: none !important;
 }
 
 /* Маркеры */
@@ -172,31 +193,38 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 6px;
-  background: #141312;
-  padding: 4px 8px;
-  border: 1px solid #2d2720;
+  background: #0a0a09;
+  padding: 6px 10px;
+  border: 1px solid #24201a;
 }
 
 .marker-label {
   font-size: 12px;
   width: 90px;
-  color: #b3a490;
+  color: #a39580;
   font-weight: bold;
 }
 
 .pills .pill {
   font-size: 16px;
-  color: #3d362d;
+  color: #2e2820;
   cursor: pointer;
-  margin: 0 4px;
+  margin: 0 3px;
+  transition: all 0.2s ease;
+}
+
+.pills .pill:hover {
+  transform: scale(1.25);
 }
 
 .pills .pill.active {
-  color: #a82424; /* Нуарный красный */
+  color: #8b0000; /* Кроваво-красный */
+  text-shadow: 0 0 6px rgba(139, 0, 0, 0.8);
 }
 
 .pills .bulb-pill.active {
-  color: #d4a323; /* Тёплый свет */
+  color: #d4a323; /* Янтарный свет */
+  text-shadow: 0 0 6px rgba(212, 163, 35, 0.8);
 }
 
 /* Пороги Урона */
@@ -212,7 +240,7 @@
 
 .threshold-item .badge {
   font-size: 10px;
-  color: #8c806e;
+  color: #7a6e5d;
   display: block;
   font-weight: bold;
   margin-bottom: 3px;
@@ -232,9 +260,9 @@
 }
 
 .bio-row label {
-  width: 70px;
+  width: 75px;
   font-size: 11px;
-  color: #8c806e;
+  color: #7a6e5d;
   font-weight: bold;
 }
 
@@ -242,7 +270,7 @@
   flex: 1;
 }
 
-/* Слайдер */
+/* Слайдер Ментала */
 .mind-labels {
   display: flex;
   justify-content: space-between;
@@ -251,12 +279,12 @@
   margin-bottom: 6px;
 }
 
-.label-cynicism { color: #a82424; }
-.label-neutral  { color: #8c806e; }
+.label-cynicism { color: #8b0000; }
+.label-neutral  { color: #7a6e5d; }
 .label-courage  { color: #2e8b57; }
 
 .mind-slider {
   width: 100%;
-  accent-color: #a82424;
+  accent-color: #8b0000;
   cursor: pointer;
 }
