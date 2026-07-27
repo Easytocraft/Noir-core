@@ -1,7 +1,6 @@
 <form class="{{cssClass}} noir-sheet-form" autocomplete="off">
 
   <div class="paper-grain"></div>
-  <div class="dossier-stamp">Секретно</div>
 
   {{!-- ШАПКА: портрет / имя / шкала цинизм-кураж --}}
   <div class="noir-header-row">
@@ -66,33 +65,45 @@
           <div class="stats-grid">
             <div class="stat-card rollable" data-stat="strength">
               <span class="stat-label">Сила</span>
-              <input type="number" name="system.stats.strength.value" value="{{system.stats.strength.value}}" data-dtype="Number" />
-              <span class="stat-die">D12</span>
+              <div class="stat-value-row">
+                <input type="number" name="system.stats.strength.value" value="{{system.stats.strength.value}}" data-dtype="Number" />
+                <i class="fas fa-dice-d20 stat-die-icon"></i>
+              </div>
             </div>
             <div class="stat-card rollable" data-stat="agility">
               <span class="stat-label">Ловкость</span>
-              <input type="number" name="system.stats.agility.value" value="{{system.stats.agility.value}}" data-dtype="Number" />
-              <span class="stat-die">D12</span>
+              <div class="stat-value-row">
+                <input type="number" name="system.stats.agility.value" value="{{system.stats.agility.value}}" data-dtype="Number" />
+                <i class="fas fa-dice-d20 stat-die-icon"></i>
+              </div>
             </div>
             <div class="stat-card rollable" data-stat="intellect">
               <span class="stat-label">Интеллект</span>
-              <input type="number" name="system.stats.intellect.value" value="{{system.stats.intellect.value}}" data-dtype="Number" />
-              <span class="stat-die">D12</span>
+              <div class="stat-value-row">
+                <input type="number" name="system.stats.intellect.value" value="{{system.stats.intellect.value}}" data-dtype="Number" />
+                <i class="fas fa-dice-d20 stat-die-icon"></i>
+              </div>
             </div>
             <div class="stat-card rollable" data-stat="eloquence">
               <span class="stat-label">Красноречие</span>
-              <input type="number" name="system.stats.eloquence.value" value="{{system.stats.eloquence.value}}" data-dtype="Number" />
-              <span class="stat-die">D12</span>
+              <div class="stat-value-row">
+                <input type="number" name="system.stats.eloquence.value" value="{{system.stats.eloquence.value}}" data-dtype="Number" />
+                <i class="fas fa-dice-d20 stat-die-icon"></i>
+              </div>
             </div>
             <div class="stat-card rollable" data-stat="endurance">
               <span class="stat-label">Выносливость</span>
-              <input type="number" name="system.stats.endurance.value" value="{{system.stats.endurance.value}}" data-dtype="Number" />
-              <span class="stat-die">D12</span>
+              <div class="stat-value-row">
+                <input type="number" name="system.stats.endurance.value" value="{{system.stats.endurance.value}}" data-dtype="Number" />
+                <i class="fas fa-dice-d20 stat-die-icon"></i>
+              </div>
             </div>
             <div class="stat-card rollable" data-stat="luck">
               <span class="stat-label">Удача</span>
-              <input type="number" name="system.stats.luck.value" value="{{system.stats.luck.value}}" data-dtype="Number" />
-              <span class="stat-die">D12</span>
+              <div class="stat-value-row">
+                <input type="number" name="system.stats.luck.value" value="{{system.stats.luck.value}}" data-dtype="Number" />
+                <i class="fas fa-dice-d20 stat-die-icon"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -108,12 +119,12 @@
           <div class="status-group">
             <div class="marker-row-header">
               <span class="marker-label">Здоровье</span>
-              <span class="marker-count">{{countActive system.health.pills}}/{{system.health.pills.length}}</span>
+              <span class="marker-count health-count">{{countActive system.health.pills}}/{{system.health.pills.length}}</span>
             </div>
             <div class="pills health-pills">
               {{#each system.health.pills}}
                 <span class="pill bullet-pill {{#if this}}active{{/if}}" data-path="system.health.pills" data-index="{{@index}}">
-                  <i class="fas fa-bullseye"></i>
+                  <span class="bullet-shape"></span>
                 </span>
               {{/each}}
             </div>
@@ -148,7 +159,6 @@
               {{/each}}
             </div>
             <span class="cells-caption">ячейки</span>
-            <button type="button" class="drug-button">Принять препарат</button>
           </div>
 
           <div class="status-group">

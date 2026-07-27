@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Playfair+Display:wght@700;900&display=swap');
 
 /* ================================================================ */
-/* NOIR-CORE — ДОСЬЕ 1940-х: старая бумага, папка-дело, штампы     */
+/* NOIR-CORE — ДОСЬЕ 1940-х: старая бумага, папка-дело              */
+/* Монохром: чёрный/серый на бумаге. Красный — только Здоровье.     */
+/* Зелёный — только Кураж.                                          */
 /* ================================================================ */
 
 .window-app.noir-sheet .window-content,
@@ -11,12 +13,12 @@
   box-sizing: border-box;
 }
 
-/* Фон окна — тёмное дерево стола, на котором лежит папка */
 .window-app.noir-sheet .window-content {
   background: #1c1712 !important;
-  color: #2b2015 !important;
+  color: #1a1512 !important;
   font-family: 'Special Elite', 'Courier New', monospace !important;
   padding: 20px !important;
+  font-size: 15px;
 }
 
 .window-app.noir-sheet .window-content::-webkit-scrollbar { width: 10px; }
@@ -32,26 +34,24 @@
 
 .window-app.noir-sheet form {
   position: relative;
-  isolation: isolate; /* создаёт свой контекст наложения для ::after (-1) и оверлеев (3-4) */
-  padding: 26px 24px;
-  color: #2b2015;
+  isolation: isolate;
+  padding: 28px 26px;
+  color: #1a1512;
 
-  /* Бумажная основа: базовый тон + пятна кофе/старения + мягкий градиент от края */
   background-color: #d9c9a3;
   background-image:
-    radial-gradient(circle at 12% 18%, rgba(120, 90, 50, 0.16) 0%, transparent 22%),
-    radial-gradient(circle at 85% 12%, rgba(120, 90, 50, 0.12) 0%, transparent 18%),
-    radial-gradient(circle at 92% 82%, rgba(120, 90, 50, 0.18) 0%, transparent 25%),
-    radial-gradient(circle at 8% 88%, rgba(120, 90, 50, 0.14) 0%, transparent 20%),
+    radial-gradient(circle at 12% 18%, rgba(90, 80, 60, 0.16) 0%, transparent 22%),
+    radial-gradient(circle at 85% 12%, rgba(90, 80, 60, 0.12) 0%, transparent 18%),
+    radial-gradient(circle at 92% 82%, rgba(90, 80, 60, 0.18) 0%, transparent 25%),
+    radial-gradient(circle at 8% 88%, rgba(90, 80, 60, 0.14) 0%, transparent 20%),
     linear-gradient(135deg, #e2d3ac 0%, #d3c199 45%, #c8b488 100%);
 
-  /* Рваный край листа */
   clip-path: polygon(0.0% 0.81%, 3.85% 0.43%, 7.69% 1.53%, 11.54% 0.26%, 15.38% 1.28%, 19.23% 0.9%, 23.08% 0.23%, 26.92% 1.22%, 30.77% 0.18%, 34.62% 1.05%, 38.46% 0.25%, 42.31% 0.3%, 46.15% 1.03%, 50.0% 1.92%, 53.85% 0.37%, 57.69% 0.59%, 61.54% 1.48%, 65.38% 2.18%, 69.23% 1.37%, 73.08% 0.97%, 76.92% 2.25%, 80.77% 0.2%, 84.62% 1.99%, 88.46% 0.74%, 92.31% 0.42%, 96.15% 0.36%, 100.0% 0.78%, 100.0% 99.37%, 96.15% 98.62%, 92.31% 97.96%, 88.46% 99.86%, 84.62% 98.33%, 80.77% 99.3%, 76.92% 99.63%, 73.08% 98.86%, 69.23% 98.96%, 65.38% 98.24%, 61.54% 99.24%, 57.69% 99.45%, 53.85% 98.36%, 50.0% 98.7%, 46.15% 98.99%, 42.31% 98.39%, 38.46% 98.64%, 34.62% 99.2%, 30.77% 98.15%, 26.92% 97.83%, 23.08% 97.84%, 19.23% 98.91%, 15.38% 98.52%, 11.54% 99.11%, 7.69% 98.98%, 3.85% 98.1%, 0.0% 99.5%);
 
   box-shadow: 0 12px 30px rgba(0,0,0,0.65);
 }
 
-/* "Подложенные" листы под верхним — эффект стопки бумаг в папке */
+/* "Подложенные" листы под верхним — эффект стопки бумаг в папке-досье */
 .window-app.noir-sheet form::after {
   content: "";
   position: absolute;
@@ -62,8 +62,6 @@
   box-shadow: 0 10px 24px rgba(0,0,0,0.55);
 }
 
-/* Зерно бумаги + лёгкие потёртости. multiply — работает на светлой бумаге
-   (в отличие от screen/overlay, которые были нужны для тёмной темы) */
 .paper-grain {
   content: "";
   position: absolute;
@@ -72,41 +70,21 @@
   z-index: 3;
   opacity: 0.5;
   mix-blend-mode: multiply;
-  filter: sepia(40%) contrast(115%);
+  filter: sepia(20%) contrast(115%);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 140px 140px;
 }
 
-/* Штамп "SECRET" в углу листа - декоративный, повёрнутый, как настоящая печать */
-.dossier-stamp {
-  position: absolute;
-  top: 18px;
-  right: 30px;
-  z-index: 4;
-  transform: rotate(-9deg);
-  border: 3px double #7a2020;
-  color: #7a2020;
-  opacity: 0.55;
-  font-family: 'Special Elite', monospace;
-  font-weight: bold;
-  font-size: 15px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-}
-
 /* ---------------------------------------------------------------- */
-/* Инпуты — печатаются прямо на бумаге, без рамок-коробок           */
+/* Инпуты — печатаются прямо на бумаге                               */
 /* ---------------------------------------------------------------- */
 
 .window-app.noir-sheet input[type="text"],
 .window-app.noir-sheet input[type="number"] {
   background: transparent !important;
-  color: #2b2015 !important;
+  color: #1a1512 !important;
   border: none !important;
-  border-bottom: 1px dotted #7a6a4a !important;
+  border-bottom: 1px dotted #6b6152 !important;
   font-family: 'Special Elite', monospace !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -114,7 +92,7 @@
 
 .window-app.noir-sheet input[type="text"]:focus,
 .window-app.noir-sheet input[type="number"]:focus {
-  border-bottom: 1px solid #7a2020 !important;
+  border-bottom: 1px solid #1a1512 !important;
   outline: none;
 }
 
@@ -124,71 +102,72 @@
 
 .noir-header-row {
   display: grid;
-  grid-template-columns: 130px 1fr 260px;
-  gap: 20px;
+  grid-template-columns: 190px 1fr 260px;
+  gap: 22px;
   align-items: center;
-  margin-bottom: 16px;
-  padding-bottom: 14px;
-  border-bottom: 2px solid #7a2020;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #1a1512;
 }
 
 .header-center { display: flex; flex-direction: column; justify-content: center; }
 .header-mind .mind-labels { margin-bottom: 8px; }
 
-@media (max-width: 700px) {
-  .noir-header-row { grid-template-columns: 90px 1fr; }
+@media (max-width: 760px) {
+  .noir-header-row { grid-template-columns: 130px 1fr; }
   .header-mind { grid-column: 1 / -1; }
 }
 
-/* Портрет — как приколотое к делу фото, чуть повёрнутое, с уголками-скотчем */
+/* Портрет — фото приколото к делу, чуть повёрнуто, с уголками-скотчем */
 .portrait-container {
   position: relative;
-  width: 130px;
-  height: 130px;
+  width: 190px;
+  height: 190px;
   background: #efe6cf;
-  border: 6px solid #efe6cf;
-  outline: 1px solid #9c8a63;
+  border: 8px solid #efe6cf;
+  outline: 1px solid #6b6152;
   transform: rotate(-2deg);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.45);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+  overflow: hidden;
 }
 
 .portrait-container img.profile-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
   border: none !important;
-  filter: sepia(55%) contrast(115%) brightness(92%) saturate(80%);
+  filter: grayscale(85%) contrast(120%) brightness(92%);
 }
 
-/* Уголки скотча */
 .portrait-container::before,
 .portrait-container::after {
   content: "";
   position: absolute;
-  width: 34px;
-  height: 14px;
+  width: 44px;
+  height: 16px;
   background: rgba(230, 220, 195, 0.75);
-  border: 1px solid rgba(150, 130, 90, 0.4);
+  border: 1px solid rgba(100, 90, 70, 0.4);
   z-index: 2;
 }
-.portrait-container::before { top: -7px; left: -8px; transform: rotate(-40deg); }
-.portrait-container::after { bottom: -7px; right: -8px; transform: rotate(-40deg); }
+.portrait-container::before { top: -8px; left: -10px; transform: rotate(-40deg); }
+.portrait-container::after { bottom: -8px; right: -10px; transform: rotate(-40deg); }
 
 /* Имя - печатная машинка на форменной строке */
 .character-name-box input {
   width: 100%;
   font-family: 'Playfair Display', 'Special Elite', serif !important;
-  font-size: 26px !important;
+  font-size: 30px !important;
   font-weight: 900;
   padding: 6px 2px;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: #1c140c !important;
-  border-bottom: 2px solid #2b2015 !important;
+  color: #1a1512 !important;
+  border-bottom: 2px solid #1a1512 !important;
 }
 
 /* ---------------------------------------------------------------- */
-/* Вкладки — как ярлычки папки дела                                 */
+/* Вкладки — ярлычки папки дела                                     */
 /* ---------------------------------------------------------------- */
 
 .noir-tabs-nav {
@@ -199,32 +178,40 @@
 
 .noir-tab {
   background: #c8b488;
-  border: 1px solid #7a6a4a;
+  border: 1px solid #6b6152;
   border-bottom: none;
-  color: #5a4a32;
+  color: #453f34;
   font-family: 'Special Elite', monospace;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size: 12px;
-  padding: 7px 16px;
+  font-size: 13px;
+  padding: 8px 18px;
   cursor: pointer;
   transition: all 0.15s ease;
   clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);
 }
 
-.noir-tab:hover { color: #2b2015; background: #d3c199; }
+.noir-tab:hover { color: #1a1512; background: #d3c199; }
 
 .noir-tab.active {
   color: #efe6cf;
-  background: #7a2020;
-  border-color: #5a1616;
+  background: #1a1512;
+  border-color: #000;
 }
 
+/* "Перелистывание страниц" при смене вкладки */
+.tab-panel {
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  opacity: 1;
+  transform: translateX(0);
+}
 .tab-panel.hidden { display: none; }
+.tab-panel.tab-page-out { opacity: 0; transform: translateX(-24px); }
+.tab-panel.tab-page-in { opacity: 0; transform: translateX(24px); }
 
 .placeholder-panel p {
-  font-size: 12px;
-  color: #5a4a32;
+  font-size: 13px;
+  color: #453f34;
   line-height: 1.6;
 }
 
@@ -233,10 +220,11 @@
   min-height: 340px;
   resize: vertical;
   background: transparent !important;
-  color: #2b2015 !important;
-  border: 1px dotted #7a6a4a !important;
+  color: #1a1512 !important;
+  border: 1px dotted #6b6152 !important;
   font-family: 'Special Elite', monospace !important;
   padding: 10px;
+  font-size: 14px;
 }
 
 /* ---------------------------------------------------------------- */
@@ -255,33 +243,33 @@
 }
 
 /* ---------------------------------------------------------------- */
-/* Секции — как приклеенные вырезки/карточки дела                   */
+/* Секции                                                            */
 /* ---------------------------------------------------------------- */
 
 .section-box {
   background: rgba(239, 230, 207, 0.55);
-  border: 1px solid #9c8a63;
-  padding: 12px;
+  border: 1px solid #6b6152;
+  padding: 13px;
   margin-bottom: 14px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.25);
 }
 
 .section-title {
-  font-size: 12px;
+  font-size: 13px;
   text-transform: uppercase;
   color: #efe6cf;
   font-weight: bold;
   letter-spacing: 2.5px;
-  margin: -12px -12px 10px -12px;
-  padding: 6px 12px;
-  background: #7a2020;
-  border-bottom: 1px solid #4a1212;
+  margin: -13px -13px 11px -13px;
+  padding: 7px 13px;
+  background: #1a1512;
+  border-bottom: 1px solid #000;
 }
 
 /* Броня и Уклонение */
 .defense-box { display: flex; justify-content: space-around; align-items: center; }
 .def-item { display: flex; flex-direction: column; align-items: center; }
-.def-label { font-size: 11px; color: #5a4a32; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; }
+.def-label { font-size: 12px; color: #453f34; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; }
 
 .evasion-icon-wrapper, .vest-icon-wrapper {
   position: relative;
@@ -295,7 +283,7 @@
 
 .evasion-icon-wrapper i, .vest-icon-wrapper i {
   font-size: 38px;
-  color: #9c8a63;
+  color: #6b6152;
   line-height: 1;
 }
 
@@ -308,13 +296,13 @@
   height: 24px;
   padding: 0;
   font-weight: bold;
-  font-size: 18px !important;
+  font-size: 19px !important;
   text-align: center;
   border-bottom: none !important;
-  color: #1c140c !important;
+  color: #1a1512 !important;
 }
 
-/* Характеристики */
+/* Характеристики - flex-колонка с фикс. высотой убирает "разнобой" строк */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -323,94 +311,115 @@
 }
 
 .stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 86px;
   background: rgba(255, 250, 235, 0.4);
-  border: 1px solid #9c8a63;
-  padding: 6px;
+  border: 1px solid #6b6152;
+  padding: 8px 6px;
   text-align: center;
   transition: all 0.15s ease-in-out;
 }
 
-.stat-card:hover { border-color: #7a2020; background: rgba(255, 250, 235, 0.65); }
+.stat-card:hover { border-color: #1a1512; background: rgba(255, 250, 235, 0.65); }
 
 .stat-card .stat-label {
-  display: block;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: bold;
-  color: #5a4a32;
+  color: #453f34;
   text-transform: uppercase;
   letter-spacing: 1px;
+  line-height: 1;
+}
+
+.stat-value-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .stat-card input {
-  width: 100% !important;
+  width: auto !important;
+  max-width: 60px;
   background: transparent !important;
   border: none !important;
-  font-size: 22px !important;
+  font-size: 24px !important;
   font-weight: bold;
   text-align: center;
-  color: #1c140c !important;
+  color: #1a1512 !important;
   box-shadow: none !important;
 }
 
-.stat-card .stat-die { display: block; font-size: 10px; color: #8a7a5a; letter-spacing: 1px; margin-top: 2px; }
+.stat-die-icon {
+  font-size: 16px;
+  color: #9c8a63;
+}
 
 /* Статус (Здоровье / Истощение / Стресс) */
 .status-group {
   background: rgba(230, 218, 190, 0.5);
-  border: 1px solid #9c8a63;
-  padding: 8px 10px;
-  margin-bottom: 8px;
+  border: 1px solid #6b6152;
+  padding: 10px 12px;
+  margin-bottom: 10px;
 }
 .status-group:last-child { margin-bottom: 0; }
 
-.marker-row-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-.marker-row-header .marker-label { width: auto; color: #5a4a32; font-weight: bold; text-transform: uppercase; font-size: 12px; }
+.marker-row-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.marker-row-header .marker-label { width: auto; color: #453f34; font-weight: bold; text-transform: uppercase; font-size: 13px; }
 
-.marker-count { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 16px; color: #7a2020; }
+.marker-count { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 17px; color: #1a1512; }
+.marker-count.health-count { color: #7a1f1f; } /* Здоровье — единственный цветной счётчик, помимо Куража */
 
-.cells-caption { display: block; font-size: 9px; color: #8a7a5a; letter-spacing: 1px; margin: 3px 0 8px 0; text-transform: uppercase; }
+.cells-caption { display: block; font-size: 10px; color: #6b6152; letter-spacing: 1px; margin: 4px 0 4px 0; text-transform: uppercase; }
 
-.pills { display: flex; flex-wrap: wrap; gap: 4px; flex: 1 1 auto; min-width: 0; }
+.pills { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: 1 1 auto; min-width: 0; }
 
-.pills .pill { font-size: 16px; color: #b3a375; cursor: pointer; line-height: 1; transition: all 0.2s ease; }
-.pills .pill:hover { transform: scale(1.2); }
-.pills .pill.active { color: #7a2020; text-shadow: none; }
-.pills .bulb-pill.active { color: #9c6a1a; }
+/* Истощение / Стресс - обычные иконки FA, увеличены x2.5 (было 16px) */
+.pills .pill i { font-size: 40px; line-height: 1; }
+.pills .pill { color: #a89a7c; cursor: pointer; transition: all 0.2s ease; }
+.pills .pill:hover:not(.bullet-pill) { transform: scale(1.15); }
+.pills .pill.active { color: #1a1512; } /* моно - истощение/стресс не красные */
 
-.status-group .thresholds-row { margin-top: 4px; }
-
-.drug-button {
-  width: 100%;
-  margin-top: 4px;
-  background: #7a2020;
-  border: 1px solid #4a1212;
-  color: #efe6cf;
-  font-family: 'Special Elite', monospace;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-size: 11px;
-  padding: 7px;
-  cursor: pointer;
-  transition: all 0.15s ease;
+/* Здоровье - патроны револьвера, не иконка FA */
+.bullet-shape {
+  display: inline-block;
+  width: 15px;
+  height: 38px; /* высота ~2.5x относительно исходных иконок 16px ряда */
+  border-radius: 50% 50% 3px 3px;
+  background: linear-gradient(180deg, #cfc39f 0%, #a8987a 55%, #786a4e 100%);
+  border: 1px solid #453f34;
+  transition: all 0.2s ease;
 }
-.drug-button:hover { background: #9c3a3a; }
+
+.bullet-pill:hover .bullet-shape { transform: scale(1.1); }
+
+.bullet-pill.active .bullet-shape {
+  background: linear-gradient(180deg, #b3413e 0%, #7a1f1f 55%, #4a1010 100%);
+  border-color: #2a0a0a;
+}
+
+.status-group .thresholds-row { margin-top: 6px; }
 
 /* Пороги урона */
 .thresholds-row { display: flex; gap: 8px; }
 .threshold-item { flex: 1; text-align: center; }
-.threshold-item .badge { font-size: 10px; color: #5a4a32; display: block; font-weight: bold; margin-bottom: 3px; text-transform: uppercase; }
-.threshold-item input { width: 100% !important; text-align: center; font-size: 12px !important; }
+.threshold-item .badge { font-size: 11px; color: #453f34; display: block; font-weight: bold; margin-bottom: 3px; text-transform: uppercase; }
+.threshold-item input { width: 100% !important; text-align: center; font-size: 13px !important; }
 
 /* Особенности персонажа */
-.bio-row { display: flex; align-items: center; margin-bottom: 8px; gap: 8px; }
-.bio-row label { width: 60px; font-size: 11px; color: #5a4a32; font-weight: bold; text-transform: uppercase; }
-.bio-row input { flex: 1; }
-.bio-row.icon-row i { width: 16px; text-align: center; color: #7a2020; flex: 0 0 auto; }
+.bio-row { display: flex; align-items: center; margin-bottom: 9px; gap: 8px; }
+.bio-row label { width: 65px; font-size: 12px; color: #453f34; font-weight: bold; text-transform: uppercase; }
+.bio-row input { flex: 1; font-size: 14px; }
+.bio-row.icon-row i { width: 16px; text-align: center; color: #1a1512; flex: 0 0 auto; }
 
-/* Слайдер Ментала */
-.mind-labels { display: flex; justify-content: space-between; font-size: 10px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; }
-.label-cynicism { color: #7a2020; }
-.label-neutral  { color: #5a4a32; }
+/* Слайдер Ментала - моно, кроме Куража */
+.mind-labels { display: flex; justify-content: space-between; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; }
+.label-cynicism { color: #453f34; }
+.label-neutral  { color: #453f34; }
 .label-courage  { color: #2e6b40; }
 
-.mind-slider { width: 100%; accent-color: #7a2020; cursor: pointer; }
+.mind-slider { width: 100%; accent-color: #1a1512; cursor: pointer; }

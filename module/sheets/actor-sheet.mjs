@@ -36,21 +36,31 @@ export class NoirActorSheet extends ActorSheet {
 
     // Клик по характеристике - бросок 1d12 + модификатор в чат
     html.find(".stat-card.rollable").click(this._onStatRoll.bind(this));
-
-    // Кнопка "Принять препарат" - отмечает следующую свободную ячейку истощения
-    html.find(".drug-button").click(this._onTakeSubstance.bind(this));
   }
 
   _onTabClick(event) {
     event.preventDefault();
     const tab = event.currentTarget.dataset.tab;
-    const html = $(event.currentTarget).closest("form");
+    const form = $(event.currentTarget).closest("form");
 
-    html.find(".noir-tab").removeClass("active");
+    form.find(".noir-tab").removeClass("active");
     event.currentTarget.classList.add("active");
 
-    html.find(".tab-panel").addClass("hidden");
-    html.find(`.tab-panel[data-tab-panel="${tab}"]`).removeClass("hidden");
+    const oldPanel = form.find(".tab-panel").not(".hidden");
+    const newPanel = form.find(`.tab-panel[data-tab-panel="${tab}"]`);
+
+    if (oldPanel.is(newPanel) || !newPanel.length) return;
+
+    // "Переворот страницы" - старая страница уезжает влево, новая появляется справа
+    oldPanel.addClass("tab-page-out");
+    setTimeout(() => {
+      oldPanel.addClass("hidden").removeClass("tab-page-out");
+
+      newPanel.removeClass("hidden").addClass("tab-page-in");
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => newPanel.removeClass("tab-page-in"));
+      });
+    }, 220);
   }
 
   async _onPillClick(event) {
@@ -79,19 +89,5 @@ export class NoirActorSheet extends ActorSheet {
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: `Проверка: ${label}`
     });
-  }
-
-  async _onTakeSubstance(event) {
-    event.preventDefault();
-    const pills = [...(this.actor.system.exhaustion?.pills ?? [])];
-    const firstFree = pills.findIndex(p => !p);
-
-    if (firstFree === -1) {
-      ui.notifications.warn("Все ячейки истощения уже заняты.");
-      return;
-    }
-
-    pills[firstFree] = true;
-    await this.actor.update({ "system.exhaustion.pills": pills });
   }
 }
