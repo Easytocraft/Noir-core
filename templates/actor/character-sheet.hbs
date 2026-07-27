@@ -2,7 +2,7 @@
 
   <div class="paper-grain"></div>
 
-  {{!-- ШАПКА: портрет / имя / шкала цинизм-кураж --}}
+  {{!-- ШАПКА: портрет / имя --}}
   <div class="noir-header-row">
     <div class="portrait-container">
       <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
@@ -12,16 +12,6 @@
       <div class="character-name-box">
         <input name="name" type="text" value="{{actor.name}}" placeholder="Имя Персонажа..." />
       </div>
-    </div>
-
-    <div class="header-mind">
-      <div class="mind-labels">
-        <span class="label-cynicism">Цинизм (-5)</span>
-        <span class="label-neutral">Нейтрал (0)</span>
-        <span class="label-courage">Кураж (+5)</span>
-      </div>
-      <input type="range" class="mind-slider" name="system.mindState.value"
-             min="-5" max="5" value="{{system.mindState.value}}" step="1" />
     </div>
   </div>
 
@@ -44,18 +34,14 @@
           <div class="section-title">Защита</div>
           <div class="defense-box">
             <div class="def-item evasion-item">
+              <i class="fas fa-running def-icon"></i>
               <span class="def-label">Уклонение</span>
-              <div class="evasion-icon-wrapper">
-                <i class="fas fa-running evasion-icon"></i>
-                <input type="number" name="system.defense.evasion.value" value="{{system.defense.evasion.value}}" />
-              </div>
+              <input type="number" class="def-value" name="system.defense.evasion.value" value="{{system.defense.evasion.value}}" />
             </div>
             <div class="def-item armor-item">
+              <i class="fas fa-vest def-icon"></i>
               <span class="def-label">Броня</span>
-              <div class="vest-icon-wrapper">
-                <i class="fas fa-shield-alt vest-icon"></i>
-                <input type="number" name="system.defense.armor.value" value="{{system.defense.armor.value}}" />
-              </div>
+              <input type="number" class="def-value" name="system.defense.armor.value" value="{{system.defense.armor.value}}" />
             </div>
           </div>
         </div>
@@ -128,7 +114,6 @@
                 </span>
               {{/each}}
             </div>
-            <span class="cells-caption">ячейки</span>
 
             <div class="thresholds-row">
               <div class="threshold-item">
@@ -148,7 +133,7 @@
 
           <div class="status-group">
             <div class="marker-row-header">
-              <span class="marker-label">Истощение & препараты</span>
+              <span class="marker-label">Истощение</span>
               <span class="marker-count">{{countActive system.exhaustion.pills}}/{{system.exhaustion.pills.length}}</span>
             </div>
             <div class="pills exhaustion-pills">
@@ -158,7 +143,6 @@
                 </span>
               {{/each}}
             </div>
-            <span class="cells-caption">ячейки</span>
           </div>
 
           <div class="status-group">
@@ -173,7 +157,6 @@
                 </span>
               {{/each}}
             </div>
-            <span class="cells-caption">ячейки</span>
           </div>
 
         </div>
@@ -186,6 +169,16 @@
             <input type="text" name="system.biography.race" value="{{system.biography.race}}" />
           </div>
           <div class="bio-row icon-row">
+            <i class="fas fa-graduation-cap"></i>
+            <label>Класс:</label>
+            <input type="text" name="system.biography.class" value="{{system.biography.class}}" />
+          </div>
+          <div class="bio-row icon-row">
+            <i class="fas fa-star"></i>
+            <label>Подкласс:</label>
+            <input type="text" name="system.biography.subclass" value="{{system.biography.subclass}}" />
+          </div>
+          <div class="bio-row icon-row">
             <i class="fas fa-comments"></i>
             <label>Языки:</label>
             <input type="text" name="system.biography.languages" value="{{system.biography.languages}}" />
@@ -194,6 +187,22 @@
             <i class="fas fa-paw"></i>
             <label>Черты:</label>
             <input type="text" name="system.biography.traits" value="{{system.biography.traits}}" />
+          </div>
+        </div>
+
+        <div class="section-box mind-card">
+          <div class="section-title">Цинизм / Кураж</div>
+          <div class="mind-labels">
+            <span class="label-cynicism">Цинизм</span>
+            <span class="label-neutral">Нейтрал</span>
+            <span class="label-courage">Кураж</span>
+          </div>
+          <input type="range" class="mind-slider" name="system.mindState.value"
+                 min="-5" max="5" value="{{system.mindState.value}}" step="1" />
+          <div class="mind-ticks">
+            <span>-5</span><span>-4</span><span>-3</span><span>-2</span><span>-1</span>
+            <span>0</span>
+            <span>+1</span><span>+2</span><span>+3</span><span>+4</span><span>+5</span>
           </div>
         </div>
 

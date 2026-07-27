@@ -34,7 +34,9 @@
       "biography": {
         "race": "Человек",
         "languages": "Русский, Уличный жаргон",
-        "traits": ""
+        "traits": "",
+        "class": "",
+        "subclass": ""
       },
       "mindState": {
         "value": 0
