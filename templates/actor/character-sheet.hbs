@@ -1,167 +1,215 @@
 <form class="{{cssClass}} noir-sheet-form" autocomplete="off">
-  <div class="sheet-main-grid">
-    
-    {{!-- ЛЕВАЯ КОЛОНКА --}}
-    <div class="left-column">
-      
-      {{!-- Портрет --}}
-      <div class="portrait-container">
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
-      </div>
 
-      {{!-- Имя Персонажа --}}
+  {{!-- ШАПКА: портрет / имя / шкала цинизм-кураж --}}
+  <div class="noir-header-row">
+    <div class="portrait-container">
+      <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+    </div>
+
+    <div class="header-center">
       <div class="character-name-box">
         <input name="name" type="text" value="{{actor.name}}" placeholder="Имя Персонажа..." />
       </div>
-
-      {{!-- Характеристики --}}
-      <div class="stats-grid">
-        <div class="stat-card rollable" data-stat="strength">
-          <span class="stat-label">СИЛА</span>
-          <input type="number" name="system.stats.strength.value" value="{{system.stats.strength.value}}" data-dtype="Number" />
-        </div>
-        <div class="stat-card rollable" data-stat="agility">
-          <span class="stat-label">ЛОВКОСТЬ</span>
-          <input type="number" name="system.stats.agility.value" value="{{system.stats.agility.value}}" data-dtype="Number" />
-        </div>
-        <div class="stat-card rollable" data-stat="intellect">
-          <span class="stat-label">ИНТЕЛЛЕКТ</span>
-          <input type="number" name="system.stats.intellect.value" value="{{system.stats.intellect.value}}" data-dtype="Number" />
-        </div>
-        <div class="stat-card rollable" data-stat="eloquence">
-          <span class="stat-label">КРАСНОРЕЧИЕ</span>
-          <input type="number" name="system.stats.eloquence.value" value="{{system.stats.eloquence.value}}" data-dtype="Number" />
-        </div>
-        <div class="stat-card rollable" data-stat="endurance">
-          <span class="stat-label">ВЫНОСЛИВОСТЬ</span>
-          <input type="number" name="system.stats.endurance.value" value="{{system.stats.endurance.value}}" data-dtype="Number" />
-        </div>
-        <div class="stat-card rollable" data-stat="luck">
-          <span class="stat-label">УДАЧА</span>
-          <input type="number" name="system.stats.luck.value" value="{{system.stats.luck.value}}" data-dtype="Number" />
-        </div>
-      </div>
-
     </div>
 
-    {{!-- ПРАВАЯ КОЛОНКА --}}
-    <div class="right-column">
-      
-      {{!-- Защита --}}
-      <div class="section-box defense-box">
-        <div class="def-item evasion-item">
-          <span class="def-label">УКЛОНЕНИЕ</span>
-          <div class="evasion-icon-wrapper">
-            <i class="fas fa-running evasion-icon"></i>
-            <input type="number" name="system.defense.evasion.value" value="{{system.defense.evasion.value}}" />
-          </div>
-        </div>
-        <div class="def-item armor-item">
-          <span class="def-label">БРОНЯ</span>
-          <div class="vest-icon-wrapper">
-            <i class="fas fa-user-shield vest-icon"></i>
-            <input type="number" name="system.defense.armor.value" value="{{system.defense.armor.value}}" />
-          </div>
-        </div>
+    <div class="header-mind">
+      <div class="mind-labels">
+        <span class="label-cynicism">Цинизм (-5)</span>
+        <span class="label-neutral">Нейтрал (0)</span>
+        <span class="label-courage">Кураж (+5)</span>
       </div>
-
-      {{!-- Маркеры --}}
-      <div class="section-box markers-box">
-        <div class="section-title">Маркеры</div>
-
-        <div class="marker-row">
-          <span class="marker-label">Здоровье</span>
-          <div class="pills health-pills">
-            {{#each system.health.pills}}
-              <span class="pill bullet-pill {{#if this}}active{{/if}}" data-index="{{@index}}">
-                <i class="fas fa-bullseye"></i>
-              </span>
-            {{/each}}
-          </div>
-        </div>
-
-        <div class="marker-row">
-          <span class="marker-label">Стресс</span>
-          <div class="pills stress-pills">
-            {{#each system.stress.pills}}
-              <span class="pill cigarette-pill {{#if this}}active{{/if}}" data-index="{{@index}}">
-                <i class="fas fa-smoking"></i>
-              </span>
-            {{/each}}
-          </div>
-        </div>
-
-        <div class="marker-row">
-          <span class="marker-label">Истощение</span>
-          <div class="pills exhaustion-pills">
-            {{#each system.exhaustion.pills}}
-              <span class="pill pill-icon {{#if this}}active{{/if}}" data-index="{{@index}}">
-                <i class="fas fa-pills"></i>
-              </span>
-            {{/each}}
-          </div>
-        </div>
-
-        <div class="marker-row">
-          <span class="marker-label">Надежда</span>
-          <div class="pills hope-pills">
-            {{#each system.hope.pills}}
-              <span class="pill bulb-pill {{#if this}}active{{/if}}" data-index="{{@index}}">
-                <i class="fas fa-lightbulb"></i>
-              </span>
-            {{/each}}
-          </div>
-        </div>
-      </div>
-
-      {{!-- Пороги Урона --}}
-      <div class="section-box thresholds-box">
-        <div class="section-title">Пороги Урона</div>
-        <div class="thresholds-row">
-          <div class="threshold-item">
-            <span class="badge">◄ МАЛЫЙ</span>
-            <input type="text" name="system.health.thresholds.minor" value="{{system.health.thresholds.minor}}" placeholder="1-5" />
-          </div>
-          <div class="threshold-item">
-            <span class="badge">◄ ОЩУТИМЫЙ</span>
-            <input type="text" name="system.health.thresholds.major" value="{{system.health.thresholds.major}}" placeholder="6-10" />
-          </div>
-          <div class="threshold-item">
-            <span class="badge">◄ ТЯЖЁЛЫЙ</span>
-            <input type="text" name="system.health.thresholds.severe" value="{{system.health.thresholds.severe}}" placeholder="11+" />
-          </div>
-        </div>
-      </div>
-
-      {{!-- Биография --}}
-      <div class="section-box bio-box">
-        <div class="section-title">Биография</div>
-        <div class="bio-row">
-          <label>Раса:</label>
-          <input type="text" name="system.biography.race" value="{{system.biography.race}}" />
-        </div>
-        <div class="bio-row">
-          <label>Языки:</label>
-          <input type="text" name="system.biography.languages" value="{{system.biography.languages}}" />
-        </div>
-        <div class="bio-row">
-          <label>Черты:</label>
-          <input type="text" name="system.biography.traits" value="{{system.biography.traits}}" />
-        </div>
-      </div>
-
-      {{!-- Слайдер --}}
-      <div class="section-box mind-box">
-        <div class="mind-labels">
-          <span class="label-cynicism">ЦИНИЗМ (-5)</span>
-          <span class="label-neutral">НЕЙТРАЛ (0)</span>
-          <span class="label-courage">КУРАЖ (+5)</span>
-        </div>
-        <input type="range" class="mind-slider" name="system.mindState.value" 
-               min="-5" max="5" value="{{system.mindState.value}}" step="1" />
-      </div>
-
+      <input type="range" class="mind-slider" name="system.mindState.value"
+             min="-5" max="5" value="{{system.mindState.value}}" step="1" />
     </div>
-
   </div>
+
+  {{!-- ВКЛАДКИ --}}
+  <nav class="noir-tabs-nav">
+    <button type="button" class="noir-tab active" data-tab="main">Основное</button>
+    <button type="button" class="noir-tab" data-tab="items">Предметы</button>
+    <button type="button" class="noir-tab" data-tab="effects">Эффекты</button>
+    <button type="button" class="noir-tab" data-tab="notes">Заметки</button>
+  </nav>
+
+  {{!-- ОСНОВНОЕ --}}
+  <section class="tab-panel" data-tab-panel="main">
+    <div class="sheet-main-grid-2col">
+
+      {{!-- ЛЕВАЯ КОЛОНКА --}}
+      <div class="col-left">
+
+        <div class="section-box defense-box-2">
+          <div class="section-title">Защита</div>
+          <div class="defense-box">
+            <div class="def-item evasion-item">
+              <span class="def-label">Уклонение</span>
+              <div class="evasion-icon-wrapper">
+                <i class="fas fa-running evasion-icon"></i>
+                <input type="number" name="system.defense.evasion.value" value="{{system.defense.evasion.value}}" />
+              </div>
+            </div>
+            <div class="def-item armor-item">
+              <span class="def-label">Броня</span>
+              <div class="vest-icon-wrapper">
+                <i class="fas fa-shield-alt vest-icon"></i>
+                <input type="number" name="system.defense.armor.value" value="{{system.defense.armor.value}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-box">
+          <div class="section-title">Характеристики</div>
+          <div class="stats-grid">
+            <div class="stat-card rollable" data-stat="strength">
+              <span class="stat-label">Сила</span>
+              <input type="number" name="system.stats.strength.value" value="{{system.stats.strength.value}}" data-dtype="Number" />
+              <span class="stat-die">D12</span>
+            </div>
+            <div class="stat-card rollable" data-stat="agility">
+              <span class="stat-label">Ловкость</span>
+              <input type="number" name="system.stats.agility.value" value="{{system.stats.agility.value}}" data-dtype="Number" />
+              <span class="stat-die">D12</span>
+            </div>
+            <div class="stat-card rollable" data-stat="intellect">
+              <span class="stat-label">Интеллект</span>
+              <input type="number" name="system.stats.intellect.value" value="{{system.stats.intellect.value}}" data-dtype="Number" />
+              <span class="stat-die">D12</span>
+            </div>
+            <div class="stat-card rollable" data-stat="eloquence">
+              <span class="stat-label">Красноречие</span>
+              <input type="number" name="system.stats.eloquence.value" value="{{system.stats.eloquence.value}}" data-dtype="Number" />
+              <span class="stat-die">D12</span>
+            </div>
+            <div class="stat-card rollable" data-stat="endurance">
+              <span class="stat-label">Выносливость</span>
+              <input type="number" name="system.stats.endurance.value" value="{{system.stats.endurance.value}}" data-dtype="Number" />
+              <span class="stat-die">D12</span>
+            </div>
+            <div class="stat-card rollable" data-stat="luck">
+              <span class="stat-label">Удача</span>
+              <input type="number" name="system.stats.luck.value" value="{{system.stats.luck.value}}" data-dtype="Number" />
+              <span class="stat-die">D12</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {{!-- ПРАВАЯ КОЛОНКА --}}
+      <div class="col-right">
+
+        <div class="section-box status-box">
+          <div class="section-title">Статус</div>
+
+          <div class="status-group">
+            <div class="marker-row-header">
+              <span class="marker-label">Здоровье</span>
+              <span class="marker-count">{{countActive system.health.pills}}/{{system.health.pills.length}}</span>
+            </div>
+            <div class="pills health-pills">
+              {{#each system.health.pills}}
+                <span class="pill bullet-pill {{#if this}}active{{/if}}" data-path="system.health.pills" data-index="{{@index}}">
+                  <i class="fas fa-bullseye"></i>
+                </span>
+              {{/each}}
+            </div>
+            <span class="cells-caption">ячейки</span>
+
+            <div class="thresholds-row">
+              <div class="threshold-item">
+                <span class="badge">◄ Малый</span>
+                <input type="text" name="system.health.thresholds.minor" value="{{system.health.thresholds.minor}}" placeholder="1-5" />
+              </div>
+              <div class="threshold-item">
+                <span class="badge">◄ Ощутимый</span>
+                <input type="text" name="system.health.thresholds.major" value="{{system.health.thresholds.major}}" placeholder="6-10" />
+              </div>
+              <div class="threshold-item">
+                <span class="badge">◄ Тяжёлый</span>
+                <input type="text" name="system.health.thresholds.severe" value="{{system.health.thresholds.severe}}" placeholder="11+" />
+              </div>
+            </div>
+          </div>
+
+          <div class="status-group">
+            <div class="marker-row-header">
+              <span class="marker-label">Истощение & препараты</span>
+              <span class="marker-count">{{countActive system.exhaustion.pills}}/{{system.exhaustion.pills.length}}</span>
+            </div>
+            <div class="pills exhaustion-pills">
+              {{#each system.exhaustion.pills}}
+                <span class="pill pill-icon {{#if this}}active{{/if}}" data-path="system.exhaustion.pills" data-index="{{@index}}">
+                  <i class="fas fa-pills"></i>
+                </span>
+              {{/each}}
+            </div>
+            <span class="cells-caption">ячейки</span>
+            <button type="button" class="drug-button">Принять препарат</button>
+          </div>
+
+          <div class="status-group">
+            <div class="marker-row-header">
+              <span class="marker-label">Стресс</span>
+              <span class="marker-count">{{countActive system.stress.pills}}/{{system.stress.pills.length}}</span>
+            </div>
+            <div class="pills stress-pills">
+              {{#each system.stress.pills}}
+                <span class="pill cigarette-pill {{#if this}}active{{/if}}" data-path="system.stress.pills" data-index="{{@index}}">
+                  <i class="fas fa-smoking"></i>
+                </span>
+              {{/each}}
+            </div>
+            <span class="cells-caption">ячейки</span>
+          </div>
+
+        </div>
+
+        <div class="section-box features-box">
+          <div class="section-title">Особенности персонажа</div>
+          <div class="bio-row icon-row">
+            <i class="fas fa-user"></i>
+            <label>Раса:</label>
+            <input type="text" name="system.biography.race" value="{{system.biography.race}}" />
+          </div>
+          <div class="bio-row icon-row">
+            <i class="fas fa-comments"></i>
+            <label>Языки:</label>
+            <input type="text" name="system.biography.languages" value="{{system.biography.languages}}" />
+          </div>
+          <div class="bio-row icon-row">
+            <i class="fas fa-paw"></i>
+            <label>Черты:</label>
+            <input type="text" name="system.biography.traits" value="{{system.biography.traits}}" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  {{!-- ПРЕДМЕТЫ (заглушка - требует отдельной работы над типами Item) --}}
+  <section class="tab-panel hidden" data-tab-panel="items">
+    <div class="section-box placeholder-panel">
+      <div class="section-title">Предметы</div>
+      <p>Раздел в разработке — потребуется описать типы предметов (оружие, снаряжение) в system.json/template.json.</p>
+    </div>
+  </section>
+
+  {{!-- ЭФФЕКТЫ (заглушка - core Foundry ActiveEffects потребует отдельной интеграции) --}}
+  <section class="tab-panel hidden" data-tab-panel="effects">
+    <div class="section-box placeholder-panel">
+      <div class="section-title">Эффекты</div>
+      <p>Раздел в разработке — потребуется подключить стандартный менеджер эффектов Foundry.</p>
+    </div>
+  </section>
+
+  {{!-- ЗАМЕТКИ --}}
+  <section class="tab-panel hidden" data-tab-panel="notes">
+    <div class="section-box">
+      <div class="section-title">Заметки</div>
+      <textarea class="notes-textarea" name="system.notes">{{system.notes}}</textarea>
+    </div>
+  </section>
+
 </form>

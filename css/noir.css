@@ -94,13 +94,6 @@
   );
 }
 
-/* Основная сетка листа должна лежать в обычном потоке под
-   оверлеями (виньетка/зерно рисуются поверх благодаря z-index) */
-.sheet-main-grid {
-  position: relative;
-  z-index: 1;
-}
-
 /* Перекрытие стандартных инпутов Foundry */
 .window-app.noir-sheet input[type="text"],
 .window-app.noir-sheet input[type="number"] {
@@ -118,19 +111,95 @@
   box-shadow: 0 0 8px rgba(139, 0, 0, 0.7) !important;
 }
 
-/* Сетка */
-.sheet-main-grid {
+/* Заголовок листа: портрет / имя / шкала цинизм-кураж */
+.noir-header-row {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 130px 1fr 260px;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.header-center { display: flex; flex-direction: column; justify-content: center; }
+
+.header-mind .mind-labels { margin-bottom: 8px; }
+
+@media (max-width: 700px) {
+  .noir-header-row {
+    grid-template-columns: 90px 1fr;
+  }
+  .header-mind { grid-column: 1 / -1; }
+}
+
+/* Вкладки */
+.noir-tabs-nav {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 2px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #2e2820;
+}
+
+.noir-tab {
+  background: #141210;
+  border: 1px solid #2e2820;
+  border-bottom: none;
+  color: #7a6e5d;
+  font-family: 'Special Elite', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.noir-tab:hover {
+  color: #e8d9b8;
+  background: #1a1414;
+}
+
+.noir-tab.active {
+  color: #e8d9b8;
+  background: linear-gradient(180deg, #3d0f0f 0%, #1a0808 100%);
+  border-color: #8b0000;
+}
+
+.tab-panel.hidden { display: none; }
+
+.placeholder-panel p {
+  font-size: 12px;
+  color: #7a6e5d;
+  line-height: 1.6;
+}
+
+.notes-textarea {
+  width: 100%;
+  min-height: 340px;
+  resize: vertical;
+  background: #080807 !important;
+  color: #e6dac8 !important;
+  border: 1px solid #3d352b !important;
+  font-family: 'Special Elite', monospace !important;
+  padding: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+}
+
+/* Сетка вкладки "Основное" */
+.sheet-main-grid-2col {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
   align-items: start;
 }
 
-/* Лист изменяемого размера (resizable: true в actor-sheet.mjs) —
-   если окно сузить меньше ~600px, колонки складываются друг под
-   друга вместо схлопывания портрета/полей */
 @media (max-width: 600px) {
-  .sheet-main-grid {
+  .sheet-main-grid-2col {
     grid-template-columns: 1fr;
   }
 }
@@ -141,8 +210,8 @@
 
 /* Портрет персонажа */
 .portrait-container {
-  width: 100%;
-  height: 300px;
+  width: 130px;
+  height: 130px;
   border: 2px solid #3d352b;
   background: #050505;
   box-shadow: 0 5px 15px rgba(0,0,0,0.8);
@@ -213,6 +282,14 @@
   text-align: center;
   color: #ffffff !important;
   box-shadow: none !important;
+}
+
+.stat-card .stat-die {
+  display: block;
+  font-size: 10px;
+  color: #5a5044;
+  letter-spacing: 1px;
+  margin-top: 2px;
 }
 
 /* ------------------------------------------ */
@@ -404,4 +481,81 @@
   width: 100%;
   accent-color: #8b0000;
   cursor: pointer;
+}
+/* ------------------------------------------ */
+/* СТАТУС (сгруппированные Здоровье/Истощение/Стресс) */
+/* ------------------------------------------ */
+
+.status-group {
+  background: #0a0a09;
+  border: 1px solid #24201a;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+
+.status-group:last-child { margin-bottom: 0; }
+
+.marker-row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.marker-row-header .marker-label {
+  width: auto;
+  color: #a39580;
+}
+
+.marker-count {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 16px;
+  color: #e8d9b8;
+}
+
+.cells-caption {
+  display: block;
+  font-size: 9px;
+  color: #5a5044;
+  letter-spacing: 1px;
+  margin: 3px 0 8px 0;
+}
+
+.status-group .thresholds-row { margin-top: 4px; }
+
+.drug-button {
+  width: 100%;
+  margin-top: 4px;
+  background: linear-gradient(180deg, #2e0d0d 0%, #1a0808 100%);
+  border: 1px solid #8b0000;
+  color: #e8d9b8;
+  font-family: 'Special Elite', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 11px;
+  padding: 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.drug-button:hover {
+  background: linear-gradient(180deg, #4a1414 0%, #240a0a 100%);
+  box-shadow: 0 0 8px rgba(139,0,0,0.6);
+}
+
+/* Особенности персонажа - строки с иконкой */
+.bio-row.icon-row {
+  gap: 8px;
+}
+
+.bio-row.icon-row i {
+  width: 16px;
+  text-align: center;
+  color: #8b0000;
+  flex: 0 0 auto;
+}
+
+.bio-row.icon-row label {
+  width: 60px;
 }
