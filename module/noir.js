@@ -19,3 +19,22 @@ Hooks.once("init", async function () {
     return arr.filter(Boolean).length;
   });
 });
+
+// Миграция: у существующих персонажей стресс мог быть сохранён с 8 ячейками
+// (старая схема). Схема (template.json) теперь даёт новым персонажам 6, но
+// уже созданные актёры хранят своё старое значение и не обновляются сами -
+// подрезаем/дополняем до 6 один раз при готовности мира.
+Hooks.once("ready", async function () {
+  if (!game.user.isGM) return;
+
+  for (const actor of game.actors) {
+    if (actor.type !== "character") continue;
+    const pills = actor.system.stress?.pills;
+    if (!Array.isArray(pills) || pills.length === 6) continue;
+
+    const trimmed = pills.slice(0, 6);
+    while (trimmed.length < 6) trimmed.push(false);
+    await actor.update({ "system.stress.pills": trimmed });
+    console.log(`Noir-Core | Миграция: у "${actor.name}" стресс приведён к 6 ячейкам.`);
+  }
+});

@@ -23,7 +23,7 @@
         }
       },
       "stress": {
-        "pills": [false, false, false, false, false, false, false, false]
+        "pills": [false, false, false, false, false, false]
       },
       "exhaustion": {
         "pills": [false, false, false, false]

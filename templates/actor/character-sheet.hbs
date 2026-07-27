@@ -13,6 +13,35 @@
       <div class="character-name-box">
         <input name="name" type="text" value="{{actor.name}}" placeholder="Имя Персонажа..." />
       </div>
+
+      <div class="section-box features-box sidebar-box">
+        <div class="section-title">Особенности персонажа</div>
+        <div class="bio-row icon-row">
+          <i class="fas fa-user"></i>
+          <label>Раса:</label>
+          <input type="text" name="system.biography.race" value="{{system.biography.race}}" />
+        </div>
+        <div class="bio-row icon-row">
+          <i class="fas fa-graduation-cap"></i>
+          <label>Класс:</label>
+          <input type="text" name="system.biography.class" value="{{system.biography.class}}" />
+        </div>
+        <div class="bio-row icon-row">
+          <i class="fas fa-star"></i>
+          <label>Подкласс:</label>
+          <input type="text" name="system.biography.subclass" value="{{system.biography.subclass}}" />
+        </div>
+        <div class="bio-row icon-row">
+          <i class="fas fa-comments"></i>
+          <label>Языки:</label>
+          <input type="text" name="system.biography.languages" value="{{system.biography.languages}}" />
+        </div>
+        <div class="bio-row icon-row">
+          <i class="fas fa-paw"></i>
+          <label>Черты:</label>
+          <input type="text" name="system.biography.traits" value="{{system.biography.traits}}" />
+        </div>
+      </div>
     </aside>
 
     {{!-- ОСНОВНАЯ ОБЛАСТЬ: вкладки и содержимое --}}
@@ -148,65 +177,34 @@
             </div>
           </div>
 
-          <div class="status-group">
-            <div class="marker-row-header">
-              <span class="marker-label">Стресс</span>
-              <span class="marker-count">{{countActive system.stress.pills}}/{{system.stress.pills.length}}</span>
+          <div class="status-group stress-combined">
+            <div class="stress-half">
+              <div class="marker-row-header">
+                <span class="marker-label">Стресс</span>
+                <span class="marker-count">{{countActive system.stress.pills}}/{{system.stress.pills.length}}</span>
+              </div>
+              <div class="pills stress-pills">
+                {{#each system.stress.pills}}
+                  <span class="pill cigarette-pill {{#if this}}active{{/if}}" data-path="system.stress.pills" data-index="{{@index}}">
+                    <i class="fas fa-smoking"></i>
+                  </span>
+                {{/each}}
+              </div>
             </div>
-            <div class="pills stress-pills">
-              {{#each system.stress.pills}}
-                <span class="pill cigarette-pill {{#if this}}active{{/if}}" data-path="system.stress.pills" data-index="{{@index}}">
-                  <i class="fas fa-smoking"></i>
-                </span>
-              {{/each}}
+
+            <div class="mind-half">
+              <div class="mind-labels">
+                <span class="label-cynicism">Цинизм</span>
+                <span class="label-courage">Кураж</span>
+              </div>
+              <input type="range" class="mind-slider" name="system.mindState.value"
+                     min="-5" max="5" value="{{system.mindState.value}}" step="1" />
+              <div class="mind-ticks">
+                <span>-5</span><span>0</span><span>+5</span>
+              </div>
             </div>
           </div>
 
-        </div>
-
-        <div class="section-box features-box">
-          <div class="section-title">Особенности персонажа</div>
-          <div class="bio-row icon-row">
-            <i class="fas fa-user"></i>
-            <label>Раса:</label>
-            <input type="text" name="system.biography.race" value="{{system.biography.race}}" />
-          </div>
-          <div class="bio-row icon-row">
-            <i class="fas fa-graduation-cap"></i>
-            <label>Класс:</label>
-            <input type="text" name="system.biography.class" value="{{system.biography.class}}" />
-          </div>
-          <div class="bio-row icon-row">
-            <i class="fas fa-star"></i>
-            <label>Подкласс:</label>
-            <input type="text" name="system.biography.subclass" value="{{system.biography.subclass}}" />
-          </div>
-          <div class="bio-row icon-row">
-            <i class="fas fa-comments"></i>
-            <label>Языки:</label>
-            <input type="text" name="system.biography.languages" value="{{system.biography.languages}}" />
-          </div>
-          <div class="bio-row icon-row">
-            <i class="fas fa-paw"></i>
-            <label>Черты:</label>
-            <input type="text" name="system.biography.traits" value="{{system.biography.traits}}" />
-          </div>
-        </div>
-
-        <div class="section-box mind-card">
-          <div class="section-title">Цинизм / Кураж</div>
-          <div class="mind-labels">
-            <span class="label-cynicism">Цинизм</span>
-            <span class="label-neutral">Нейтрал</span>
-            <span class="label-courage">Кураж</span>
-          </div>
-          <input type="range" class="mind-slider" name="system.mindState.value"
-                 min="-5" max="5" value="{{system.mindState.value}}" step="1" />
-          <div class="mind-ticks">
-            <span>-5</span><span>-4</span><span>-3</span><span>-2</span><span>-1</span>
-            <span>0</span>
-            <span>+1</span><span>+2</span><span>+3</span><span>+4</span><span>+5</span>
-          </div>
         </div>
 
       </div>
