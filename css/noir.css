@@ -104,15 +104,18 @@
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: 26px;
-  align-items: start;
+  align-items: stretch;
 }
 
 @media (max-width: 760px) {
   .noir-page-layout { grid-template-columns: 1fr; }
 }
 
-/* Боковая колонка - фото, имя, и место для доп. информации ниже */
+/* Боковая колонка - фото, имя, и место для доп. информации ниже.
+   height:100% + border-right тянется во всю высоту листа, а не только
+   до конца собственного контента */
 .noir-sidebar {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -246,7 +249,7 @@
 
 .sheet-main-grid-2col {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.92fr 1.08fr;
   gap: 18px;
   align-items: start;
 }
@@ -297,12 +300,13 @@
   letter-spacing: 0.5px;
 }
 
-.def-value {
+.window-app.noir-sheet .def-value {
   width: 64px !important;
   text-align: center;
   font-size: 26px !important;
   font-weight: bold;
   color: #1a1512 !important;
+  border-bottom: none !important; /* убирает "плавающее" пунктирное подчёркивание под центрированным числом */
 }
 
 /* Характеристики - flex-колонка с фикс. высотой убирает "разнобой" строк */
@@ -345,11 +349,12 @@
   gap: 6px;
 }
 
-.stat-card input {
+.window-app.noir-sheet .stat-card input {
   width: auto !important;
   max-width: 60px;
   background: transparent !important;
   border: none !important;
+  border-bottom: none !important; /* убирает "плавающее" пунктирное подчёркивание под центрированным числом */
   font-size: 24px !important;
   font-weight: bold;
   text-align: center;
@@ -377,10 +382,10 @@
 .marker-count { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 17px; color: #1a1512; }
 .marker-count.health-count { color: #7a1f1f; } /* Здоровье — единственный цветной счётчик, помимо Куража */
 
-.pills { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: 1 1 auto; min-width: 0; }
+.pills { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; flex: 1 1 auto; min-width: 0; }
 
-/* Истощение / Стресс - обычные иконки FA, увеличены x2.5 (было 16px) */
-.pills .pill i { font-size: 40px; line-height: 1; }
+/* Истощение / Стресс - обычные иконки FA, увеличены (было 16px) */
+.pills .pill i { font-size: 34px; line-height: 1; }
 .pills .pill { color: #a89a7c; cursor: pointer; transition: all 0.2s ease; }
 .pills .pill:hover:not(.bullet-pill) { transform: scale(1.15); }
 .pills .pill.active { color: #1a1512; } /* моно - истощение/стресс не красные */
