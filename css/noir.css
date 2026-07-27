@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Playfair+Display:wght@700;900&display=swap');
 
 /* ========================================== */
 /* NOIR-CORE SYSTEM - ATMOSPHERIC NOIR THEME  */
@@ -55,20 +55,21 @@
   pointer-events: none;
   z-index: 5;
   opacity: 0.5;
-  mix-blend-mode: overlay;
+  mix-blend-mode: screen; /* overlay почти не виден на почти-чёрном фоне; screen — виден */
+  filter: contrast(170%) brightness(120%);
   background-image:
     /* редкие вертикальные "царапины" плёнки */
     repeating-linear-gradient(
       100deg,
-      rgba(255,255,255,0.035) 0px,
-      rgba(255,255,255,0.035) 1px,
+      rgba(255,255,255,0.07) 0px,
+      rgba(255,255,255,0.07) 1px,
       transparent 1px,
       transparent 140px
     ),
     repeating-linear-gradient(
       82deg,
-      rgba(255,255,255,0.02) 0px,
-      rgba(255,255,255,0.02) 1px,
+      rgba(255,255,255,0.045) 0px,
+      rgba(255,255,255,0.045) 1px,
       transparent 1px,
       transparent 220px
     ),
@@ -159,12 +160,13 @@
 .character-name-box input {
   width: 100%;
   margin-top: 10px;
-  font-size: 18px !important;
-  font-weight: bold;
+  font-family: 'Playfair Display', 'Special Elite', serif !important;
+  font-size: 22px !important;
+  font-weight: 900;
   text-align: center;
-  padding: 6px;
+  padding: 8px 6px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: #f5ebd8 !important;
   background: #141210 !important;
   border: 1px solid #5a1919 !important; /* Легкий штрих бордового */
@@ -223,17 +225,22 @@
   padding: 10px;
   margin-bottom: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+  position: relative;
+  /* срезанный уголок, как у папки с делом */
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
 }
 
 .section-title {
   font-size: 12px;
   text-transform: uppercase;
-  color: #8b0000; /* Нуарный бордовый акцент */
+  color: #e8d9b8;
   font-weight: bold;
-  letter-spacing: 1.5px;
-  margin-bottom: 8px;
-  border-bottom: 1px dashed #3d352b;
-  padding-bottom: 3px;
+  letter-spacing: 2px;
+  margin: -10px -10px 10px -10px; /* растягиваем плашку на всю ширину box */
+  padding: 6px 10px 6px 12px;
+  background: linear-gradient(90deg, #3d0f0f 0%, #1a0808 100%);
+  border-bottom: 1px solid #8b0000;
+  border-left: 3px solid #8b0000;
 }
 
 /* Броня и Уклонение */
