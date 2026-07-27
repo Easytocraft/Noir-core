@@ -2,18 +2,21 @@
 
   <div class="paper-grain"></div>
 
-  {{!-- ШАПКА: портрет / имя --}}
-  <div class="noir-header-row">
-    <div class="portrait-container">
-      <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
-    </div>
+  <div class="noir-page-layout">
 
-    <div class="header-center">
+    {{!-- БОКОВАЯ КОЛОНКА: фото, имя, и место для доп. информации ниже --}}
+    <aside class="noir-sidebar">
+      <div class="portrait-container">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+      </div>
+
       <div class="character-name-box">
         <input name="name" type="text" value="{{actor.name}}" placeholder="Имя Персонажа..." />
       </div>
-    </div>
-  </div>
+    </aside>
+
+    {{!-- ОСНОВНАЯ ОБЛАСТЬ: вкладки и содержимое --}}
+    <div class="noir-main-content">
 
   {{!-- ВКЛАДКИ --}}
   <nav class="noir-tabs-nav">
@@ -233,5 +236,8 @@
       <textarea class="notes-textarea" name="system.notes">{{system.notes}}</textarea>
     </div>
   </section>
+
+    </div>
+  </div>
 
 </form>

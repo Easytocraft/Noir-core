@@ -100,20 +100,29 @@
 /* Заголовок листа: портрет / имя / шкала                           */
 /* ---------------------------------------------------------------- */
 
-.noir-header-row {
+.noir-page-layout {
   display: grid;
-  grid-template-columns: 230px 1fr;
-  gap: 24px;
-  align-items: center;
-  margin-bottom: 18px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid #1a1512;
+  grid-template-columns: 260px 1fr;
+  gap: 26px;
+  align-items: start;
 }
 
-.header-center { display: flex; flex-direction: column; justify-content: center; }
+@media (max-width: 760px) {
+  .noir-page-layout { grid-template-columns: 1fr; }
+}
+
+/* Боковая колонка - фото, имя, и место для доп. информации ниже */
+.noir-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-right: 2px solid #1a1512;
+}
 
 @media (max-width: 760px) {
-  .noir-header-row { grid-template-columns: 160px 1fr; }
+  .noir-sidebar { border-right: none; border-bottom: 2px solid #1a1512; }
 }
 
 /* Портрет — крупнее и вытянутее (как удлинённое досье-фото), с уголками-скотчем.
@@ -153,14 +162,19 @@
 .portrait-container::after { bottom: -9px; right: -12px; transform: rotate(-40deg); }
 
 /* Имя - печатная машинка на форменной строке */
+.character-name-box {
+  width: 100%;
+}
+
 .character-name-box input {
   width: 100%;
   font-family: 'Playfair Display', 'Special Elite', serif !important;
-  font-size: 30px !important;
+  font-size: 20px !important;
   font-weight: 900;
   padding: 6px 2px;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 1.5px;
+  text-align: center;
   color: #1a1512 !important;
   border-bottom: 2px solid #1a1512 !important;
 }
