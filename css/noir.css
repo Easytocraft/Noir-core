@@ -96,6 +96,25 @@
   outline: none;
 }
 
+/* Выпадающие списки (Раса/Класс) - тот же "бумажный" стиль, что у текстовых полей */
+.window-app.noir-sheet select.noir-select {
+  background: transparent !important;
+  color: #1a1512 !important;
+  border: none !important;
+  border-bottom: 1px dotted #6b6152 !important;
+  font-family: 'Special Elite', monospace !important;
+  font-size: 14px;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  flex: 1;
+  cursor: pointer;
+}
+
+.window-app.noir-sheet select.noir-select:focus {
+  border-bottom: 1px solid #1a1512 !important;
+  outline: none;
+}
+
 /* ---------------------------------------------------------------- */
 /* Заголовок листа: портрет / имя / шкала                           */
 /* ---------------------------------------------------------------- */
@@ -512,3 +531,162 @@
 .label-cynicism { color: #453f34; }
 .label-neutral  { color: #453f34; }
 .label-courage  { color: #2e6b40; }
+
+/* ---------------------------------------------------------------- */
+/* Способности класса/расы - автоподстановка в сайдбаре             */
+/* ---------------------------------------------------------------- */
+
+.abilities-box {
+  width: 100%;
+}
+
+.abilities-group-label {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 15px;
+  color: #1a1512;
+  margin: 10px 0 6px 0;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #6b6152;
+}
+.abilities-group-label:first-child { margin-top: 0; }
+.abilities-group-label .key-attrs {
+  font-family: 'Special Elite', monospace;
+  font-weight: normal;
+  font-size: 11px;
+  color: #6b6152;
+}
+
+.ability-entry {
+  margin-bottom: 8px;
+}
+
+.ability-name {
+  font-weight: bold;
+  font-size: 13px;
+  color: #1a1512;
+}
+
+.ability-type {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border: 1px solid #6b6152;
+  color: #453f34;
+}
+.ability-type-Пассивка { color: #453f34; }
+.ability-type-Актив { color: #7a1f1f; border-color: #7a1f1f; }
+
+.ability-text {
+  font-size: 12px;
+  color: #453f34;
+  line-height: 1.4;
+  margin: 3px 0 0 0;
+}
+
+.placeholder-panel-text {
+  font-size: 12px;
+  color: #6b6152;
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------------- */
+/* Системная шапка окна Foundry (название, кнопки) - под стиль листа */
+/* ---------------------------------------------------------------- */
+
+.window-app.noir-sheet .window-header {
+  background: linear-gradient(180deg, #2a2420 0%, #15110d 100%) !important;
+  border-bottom: 2px solid #7a1f1f !important;
+  color: #e8d9b8 !important;
+  font-family: 'Special Elite', monospace !important;
+}
+
+.window-app.noir-sheet .window-header .window-title {
+  color: #e8d9b8 !important;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.window-app.noir-sheet .window-header a.header-button,
+.window-app.noir-sheet .window-header .header-button {
+  color: #c9b896 !important;
+}
+
+.window-app.noir-sheet .window-header a.header-button:hover,
+.window-app.noir-sheet .window-header .header-button:hover {
+  color: #efe6cf !important;
+  text-shadow: 0 0 6px rgba(232, 217, 184, 0.5);
+}
+
+/* Кнопка "Прокачать" в шапке - лёгкий акцент, чтобы выделялась среди прочих */
+.window-app.noir-sheet .window-header .noir-level-up i {
+  color: #c97a2e !important;
+}
+
+/* Бейдж уровня под именем в сайдбаре */
+.level-badge {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #7a1f1f;
+  text-align: center;
+  margin-top: -6px;
+}
+
+/* ---------------------------------------------------------------- */
+/* Диалог создания персонажа (Foundry Dialog с classes: ["noir-dialog"]) */
+/* ---------------------------------------------------------------- */
+
+.window-app.noir-dialog .window-header {
+  background: linear-gradient(180deg, #2a2420 0%, #15110d 100%) !important;
+  border-bottom: 2px solid #7a1f1f !important;
+  color: #e8d9b8 !important;
+  font-family: 'Special Elite', monospace !important;
+}
+.window-app.noir-dialog .window-header .window-title { color: #e8d9b8 !important; }
+
+.window-app.noir-dialog .window-content {
+  background: #d9c9a3 !important;
+  color: #1a1512 !important;
+  font-family: 'Special Elite', monospace !important;
+  padding: 16px !important;
+}
+
+.noir-creation-form .form-group {
+  margin-bottom: 12px;
+}
+.noir-creation-form label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #453f34;
+  margin-bottom: 4px;
+}
+.noir-creation-form select,
+.noir-creation-form textarea {
+  width: 100%;
+  background: rgba(255,250,235,0.5) !important;
+  color: #1a1512 !important;
+  border: 1px solid #6b6152 !important;
+  font-family: 'Special Elite', monospace !important;
+  padding: 6px;
+}
+
+.window-app.noir-dialog .dialog-buttons button {
+  background: #1a1512 !important;
+  color: #e8d9b8 !important;
+  border: 1px solid #7a1f1f !important;
+  font-family: 'Special Elite', monospace !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.window-app.noir-dialog .dialog-buttons button:hover {
+  background: #2a2420 !important;
+}

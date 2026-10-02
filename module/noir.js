@@ -18,6 +18,11 @@ Hooks.once("init", async function () {
     if (!Array.isArray(arr)) return 0;
     return arr.filter(Boolean).length;
   });
+
+  // Хелпер сравнения - нужен, чтобы отметить выбранный <option> в списках класса/расы
+  Handlebars.registerHelper("eq", function (a, b) {
+    return a === b;
+  });
 });
 
 // Миграция: у существующих персонажей стресс мог быть сохранён с 8 ячейками

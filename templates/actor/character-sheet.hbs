@@ -13,23 +13,29 @@
       <div class="character-name-box">
         <input name="name" type="text" value="{{actor.name}}" placeholder="Имя Персонажа..." />
       </div>
+      <div class="level-badge">Уровень {{system.level}}</div>
 
       <div class="section-box features-box sidebar-box">
         <div class="section-title">Особенности персонажа</div>
         <div class="bio-row icon-row">
           <i class="fas fa-user"></i>
           <label>Раса:</label>
-          <input type="text" name="system.biography.race" value="{{system.biography.race}}" />
+          <select name="system.biography.race" class="noir-select">
+            <option value="">—</option>
+            {{#each raceList}}
+              <option value="{{this}}" {{#if (eq this ../system.biography.race)}}selected{{/if}}>{{this}}</option>
+            {{/each}}
+          </select>
         </div>
         <div class="bio-row icon-row">
           <i class="fas fa-graduation-cap"></i>
           <label>Класс:</label>
-          <input type="text" name="system.biography.class" value="{{system.biography.class}}" />
-        </div>
-        <div class="bio-row icon-row">
-          <i class="fas fa-star"></i>
-          <label>Подкласс:</label>
-          <input type="text" name="system.biography.subclass" value="{{system.biography.subclass}}" />
+          <select name="system.biography.class" class="noir-select">
+            <option value="">—</option>
+            {{#each classList}}
+              <option value="{{this}}" {{#if (eq this ../system.biography.class)}}selected{{/if}}>{{this}}</option>
+            {{/each}}
+          </select>
         </div>
         <div class="bio-row icon-row">
           <i class="fas fa-comments"></i>
@@ -41,6 +47,37 @@
           <label>Черты:</label>
           <input type="text" name="system.biography.traits" value="{{system.biography.traits}}" />
         </div>
+        <div class="bio-row icon-row">
+          <i class="fas fa-suitcase"></i>
+          <label>Снаряж.:</label>
+          <input type="text" name="system.biography.equipment" value="{{system.biography.equipment}}" />
+        </div>
+      </div>
+
+      {{!-- СПОСОБНОСТИ: подставляются автоматически по выбранному классу/расе --}}
+      <div class="section-box abilities-box sidebar-box">
+        <div class="section-title">Способности</div>
+
+        {{#if classInfo}}
+          <div class="abilities-group-label">{{system.biography.class}} <span class="key-attrs">({{classInfo.keyAttrs}})</span></div>
+          {{#each classInfo.abilities}}
+            <div class="ability-entry">
+              <span class="ability-name">{{this.name}}</span>
+              <span class="ability-type ability-type-{{this.type}}">{{this.type}}</span>
+              <p class="ability-text">{{this.text}}</p>
+            </div>
+          {{/each}}
+        {{else}}
+          <p class="placeholder-panel-text">Выберите класс, чтобы увидеть его способности.</p>
+        {{/if}}
+
+        {{#if raceInfo}}
+          <div class="abilities-group-label race-group-label">{{system.biography.race}} <span class="key-attrs">({{raceInfo.bonus}})</span></div>
+          <div class="ability-entry">
+            <span class="ability-name">{{raceInfo.traitName}}</span>
+            <p class="ability-text">{{raceInfo.traitText}}</p>
+          </div>
+        {{/if}}
       </div>
     </aside>
 

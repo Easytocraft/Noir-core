@@ -36,11 +36,12 @@
         "languages": "Русский, Уличный жаргон",
         "traits": "",
         "class": "",
-        "subclass": ""
+        "equipment": ""
       },
       "mindState": {
         "value": 0
       },
+      "level": 1,
       "notes": ""
     }
   }
