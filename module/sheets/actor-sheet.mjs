@@ -46,16 +46,15 @@ export class NoirActorSheet extends ActorSheet {
   }
 
   _onLevelUpClick() {
-    const hasClass = !!this.actor.system.biography?.class;
+    const level = this.actor.system.level ?? 0;
 
-    // Персонаж ещё не создан (класс не выбран) - вместо повышения уровня
-    // открываем мастер создания
-    if (!hasClass) {
+    // Персонаж создаётся на 0 уровне - первое нажатие "Прокачать"
+    // открывает мастер создания (раса/класс/снаряжение) вместо повышения уровня
+    if (level < 1) {
       this._openCreationDialog();
       return;
     }
 
-    const level = this.actor.system.level ?? 1;
     if (level >= 5) {
       ui.notifications.info("Максимальный уровень персонажа (5) уже достигнут.");
       return;

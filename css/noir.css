@@ -690,3 +690,31 @@
 .window-app.noir-dialog .dialog-buttons button:hover {
   background: #2a2420 !important;
 }
+
+/* Раса/Класс теперь только отображаются (задаются через мастер создания) */
+.bio-readonly {
+  flex: 1;
+  font-size: 14px;
+  color: #1a1512;
+  padding-bottom: 2px;
+  border-bottom: 1px dotted #6b6152;
+}
+
+/* Вкладка "Способности" - классовые способности и расовая черта рядом */
+.abilities-tab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+@media (max-width: 600px) {
+  .abilities-tab-grid { grid-template-columns: 1fr; }
+}
+
+.ability-params {
+  font-size: 11px;
+  font-style: italic;
+  color: #6b6152;
+  margin: 0 0 10px 0;
+}

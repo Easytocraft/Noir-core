@@ -20,22 +20,12 @@
         <div class="bio-row icon-row">
           <i class="fas fa-user"></i>
           <label>Раса:</label>
-          <select name="system.biography.race" class="noir-select">
-            <option value="">—</option>
-            {{#each raceList}}
-              <option value="{{this}}" {{#if (eq this ../system.biography.race)}}selected{{/if}}>{{this}}</option>
-            {{/each}}
-          </select>
+          <span class="bio-readonly">{{#if system.biography.race}}{{system.biography.race}}{{else}}—{{/if}}</span>
         </div>
         <div class="bio-row icon-row">
           <i class="fas fa-graduation-cap"></i>
           <label>Класс:</label>
-          <select name="system.biography.class" class="noir-select">
-            <option value="">—</option>
-            {{#each classList}}
-              <option value="{{this}}" {{#if (eq this ../system.biography.class)}}selected{{/if}}>{{this}}</option>
-            {{/each}}
-          </select>
+          <span class="bio-readonly">{{#if system.biography.class}}{{system.biography.class}}{{else}}—{{/if}}</span>
         </div>
         <div class="bio-row icon-row">
           <i class="fas fa-comments"></i>
@@ -53,32 +43,6 @@
           <input type="text" name="system.biography.equipment" value="{{system.biography.equipment}}" />
         </div>
       </div>
-
-      {{!-- СПОСОБНОСТИ: подставляются автоматически по выбранному классу/расе --}}
-      <div class="section-box abilities-box sidebar-box">
-        <div class="section-title">Способности</div>
-
-        {{#if classInfo}}
-          <div class="abilities-group-label">{{system.biography.class}} <span class="key-attrs">({{classInfo.keyAttrs}})</span></div>
-          {{#each classInfo.abilities}}
-            <div class="ability-entry">
-              <span class="ability-name">{{this.name}}</span>
-              <span class="ability-type ability-type-{{this.type}}">{{this.type}}</span>
-              <p class="ability-text">{{this.text}}</p>
-            </div>
-          {{/each}}
-        {{else}}
-          <p class="placeholder-panel-text">Выберите класс, чтобы увидеть его способности.</p>
-        {{/if}}
-
-        {{#if raceInfo}}
-          <div class="abilities-group-label race-group-label">{{system.biography.race}} <span class="key-attrs">({{raceInfo.bonus}})</span></div>
-          <div class="ability-entry">
-            <span class="ability-name">{{raceInfo.traitName}}</span>
-            <p class="ability-text">{{raceInfo.traitText}}</p>
-          </div>
-        {{/if}}
-      </div>
     </aside>
 
     {{!-- ОСНОВНАЯ ОБЛАСТЬ: вкладки и содержимое --}}
@@ -87,6 +51,7 @@
   {{!-- ВКЛАДКИ --}}
   <nav class="noir-tabs-nav">
     <button type="button" class="noir-tab active" data-tab="main">Основное</button>
+    <button type="button" class="noir-tab" data-tab="abilities">Способности</button>
     <button type="button" class="noir-tab" data-tab="items">Предметы</button>
     <button type="button" class="noir-tab" data-tab="effects">Эффекты</button>
     <button type="button" class="noir-tab" data-tab="notes">Заметки</button>
@@ -245,6 +210,43 @@
         </div>
 
       </div>
+    </div>
+  </section>
+
+  {{!-- СПОСОБНОСТИ: подставляются автоматически по выбранному классу/расе --}}
+  <section class="tab-panel hidden" data-tab-panel="abilities">
+    <div class="abilities-tab-grid">
+
+      <div class="section-box">
+        <div class="section-title">Классовые способности</div>
+        {{#if classInfo}}
+          <div class="abilities-group-label">{{system.biography.class}} <span class="key-attrs">({{classInfo.keyAttrs}})</span></div>
+          <p class="ability-params">{{classInfo.params}}</p>
+          {{#each classInfo.abilities}}
+            <div class="ability-entry">
+              <span class="ability-name">{{this.name}}</span>
+              <span class="ability-type ability-type-{{this.type}}">{{this.type}}</span>
+              <p class="ability-text">{{this.text}}</p>
+            </div>
+          {{/each}}
+        {{else}}
+          <p class="placeholder-panel-text">Класс ещё не выбран. Нажмите «Прокачать» в шапке окна, чтобы создать персонажа.</p>
+        {{/if}}
+      </div>
+
+      <div class="section-box">
+        <div class="section-title">Расовая черта</div>
+        {{#if raceInfo}}
+          <div class="abilities-group-label">{{system.biography.race}} <span class="key-attrs">({{raceInfo.bonus}})</span></div>
+          <div class="ability-entry">
+            <span class="ability-name">{{raceInfo.traitName}}</span>
+            <p class="ability-text">{{raceInfo.traitText}}</p>
+          </div>
+        {{else}}
+          <p class="placeholder-panel-text">Раса ещё не выбрана.</p>
+        {{/if}}
+      </div>
+
     </div>
   </section>
 
